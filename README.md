@@ -9,8 +9,8 @@ Benjamin Szabo - Design Engineer - benny03.szabo@gmail.com
 
 Logan Rigdon - Project Manager - logan_rigdon1@baylor.edu
 
-Peter Stewart - Quality Assurance Engineer
+Peter Stewart - Quality Assurance Engineer - peter_stewart3@baylor.edu
 
-Peter Whitcomb - Quality Assurance Engineer
+Peter Whitcomb - Quality Assurance Engineer - peter.whitcomb727@gmail.com
 
 Samuel Fries - Project Librarian - samuelfries@gmail.com
