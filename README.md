@@ -3,7 +3,7 @@ Spring 2024 Group Project for Software Engineering I
 
 Andrew Arthur - Requirements Engineer - akarthur04@gmail.com / andrew_arthur1@baylor.edu
 
-August Rothpletz - Design Engineer - august_rothpletz1@baylor.edu
+(John) August Rothpletz - Design Engineer - august_rothpletz1@baylor.edu
 
 Benjamin Szabo - Design Engineer - benny03.szabo@gmail.com / benjamin_szabo1@baylor.edu
 
