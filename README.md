@@ -1,16 +1,16 @@
 # PrimeTimeHotel
 Spring 2024 Group Project for Software Engineering I
 
-Andrew Arthur
+Andrew Arthur - Requirements Engineer - akarthur04@gmail.com / andrew_arthur1@baylor.edu
 
-August Rothpletz
+August Rothpletz - Design Engineer - august_rothpletz1@baylor.edu
 
-Benjamin Szabo
+Benjamin Szabo - Design Engineer - benny03.szabo@gmail.com
 
-Logan Rigdon
+Logan Rigdon - Project Manager - logan_rigdon1@baylor.edu
 
-Peter Stewart
+Peter Stewart - Quality Assurance Engineer
 
-Peter Whitcomb
+Peter Whitcomb - Quality Assurance Engineer
 
-Samuel Fries
+Samuel Fries - Project Librarian - samuelfries@gmail.com
