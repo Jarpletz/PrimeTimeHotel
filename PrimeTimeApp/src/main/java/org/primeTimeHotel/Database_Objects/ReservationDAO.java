@@ -1,4 +1,7 @@
-package org.primeTimeHotel;
+package org.primeTimeHotel.Database_Objects;
+
+import org.primeTimeHotel.Domain_Model_Objects.Reservation;
+import org.primeTimeHotel.Domain_Model_Objects.ReservationStatus;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -9,7 +12,7 @@ public class ReservationDAO {
 
     ReservationDAO(){
         tempData = Arrays.asList(
-                new Reservation(1,69,34,new Date(2024,3,18),new Date(2024,3,19),ReservationStatus.SCHEDULED),
+                new Reservation(1,69,34,new Date(2024,3,18),new Date(2024,3,19), ReservationStatus.SCHEDULED),
                 new Reservation(2,65,34,new Date(2024,3,16),new Date(2024,3,20),ReservationStatus.CANCELED),
                 new Reservation(3,23,34,new Date(2024,3,19),new Date(2024,3,22),ReservationStatus.CHECKED_IN),
                 new Reservation(4,23,33,new Date(2023,11,27),new Date(2024,11,30),ReservationStatus.CHECKED_OUT),

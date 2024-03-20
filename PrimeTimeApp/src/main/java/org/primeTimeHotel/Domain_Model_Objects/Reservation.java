@@ -1,4 +1,4 @@
-package org.primeTimeHotel;
+package org.primeTimeHotel.Domain_Model_Objects;
 
 import java.util.Date;
 import java.util.Objects;
