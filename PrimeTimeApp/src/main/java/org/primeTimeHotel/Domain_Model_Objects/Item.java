@@ -17,7 +17,7 @@ public class Item {
         this.id = idCounter;
         idCounter++;
     }
-    public Item(String itemName, String itemDescription, int itemId, double itemPrice, Image img){
+    public Item(String itemName, String itemDescription, int itemId, double itemPrice, ImageIcon img){
         this.name = itemName;
         this.description = itemDescription;
         this.id = itemId;
@@ -29,12 +29,12 @@ public class Item {
     public void setDescription(String description) {this.description = description;}
     public void setId(int id) {this.id = id;}
     public void setPrice(double price) {this.price = price;}
-    public void setImage(Image image) {this.image = image;}
+    public void setImage(ImageIcon image) {this.image = image;}
     public String getName() {return name;}
     public String getDescription() {return description;}
     public int getID(){return this.id;}
     public double getPrice() {return price;}
-    public Image getImage() {return image;}
+    public ImageIcon getImage() {return image;}
 
     @Override
     public boolean equals(Object object) {
