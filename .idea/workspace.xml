@@ -10,6 +10,7 @@
       <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/ClerkAccount.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/GuestAccount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/Floors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +21,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -43,9 +45,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "peterStewart",
+    "git-widget-placeholder": "AddingFloorAndBed",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/modules/baylor/spring24/SoftwareEngineringOne/Project/Project/git",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -71,11 +72,22 @@
       <updated>1710897882964</updated>
       <workItem from="1710897887160" duration="343000" />
       <workItem from="1710898299873" duration="308000" />
-      <workItem from="1710953473093" duration="2038000" />
+      <workItem from="1710901915606" duration="2862000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/NatureRetreatRoom.java</url>
+          <line>5</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
