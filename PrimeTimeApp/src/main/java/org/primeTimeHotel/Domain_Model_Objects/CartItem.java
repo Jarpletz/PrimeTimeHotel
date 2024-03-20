@@ -16,9 +16,9 @@ public class CartItem {
     }
 
     public CartItem(Item item, int quantity, int serialNumber) {
-        this.item = item;
-        this.quantity = quantity;
-        this.serialNumber = serialNumber;
+        setItem(item);
+        setQuantity(quantity);
+        setSerialNumber(serialNumber);
     }
 
 
