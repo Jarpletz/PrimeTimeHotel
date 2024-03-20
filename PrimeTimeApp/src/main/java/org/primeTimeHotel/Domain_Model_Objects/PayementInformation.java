@@ -36,7 +36,7 @@ public class PayementInformation {
 
     @Override
     public String toString() { // for debugging //
-        final StringBuffer sb = new StringBuffer("PayementInformation{");
+        final StringBuilder sb = new StringBuilder("PayementInformation{");
         sb.append("cardProvider='").append(cardProvider).append('\'');
         sb.append(", cardNumber=").append(cardNumber);
         sb.append(", experationDate='").append(expirationDate).append('\'');
