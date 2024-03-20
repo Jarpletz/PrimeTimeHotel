@@ -1,5 +1,6 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
@@ -8,7 +9,7 @@ public class Item {
     private double price;
     private String name;
     private String description;
-    private Image image;
+    private ImageIcon image;
 
     private static int idCounter = 0;
 
