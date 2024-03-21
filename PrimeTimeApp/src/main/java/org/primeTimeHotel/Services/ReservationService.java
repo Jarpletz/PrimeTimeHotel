@@ -19,10 +19,7 @@ public class ReservationService {
     //true if there are no room conflicts
     public  boolean checkReservationValid(Reservation reservation){
         List<Reservation> conflictingRooms = reservationDAO.fetchConflictingReservations(reservation);
-        if(conflictingRooms.size()>0){
-            return false;
-        }
-        return true;
+        return conflictingRooms.isEmpty();
     }
 
     //saves a new reservation in the system. Returns true if successful
@@ -50,6 +47,6 @@ public class ReservationService {
     public List<Reservation> searchReservations(String guestInfo){
         List<Integer> userIds = new ArrayList<>();
         //TODO: get a list of all user IDs here whose accountInfo matches what was searched
-        return reservationDAO.fetchAllReservations();
+        return reservationDAO.fetchByUserList(userIds);
     }
 }

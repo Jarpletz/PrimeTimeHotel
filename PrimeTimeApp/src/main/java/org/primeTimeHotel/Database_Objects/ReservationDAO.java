@@ -58,10 +58,21 @@ public class ReservationDAO {
                 .toList();
     }
 
+    public List<Reservation> fetchByUserList(List<Integer> userIds){
+        return tempData.stream()
+                .filter(r->
+                                userIds.contains(r.getUserId())
+                                && r.getStatus()!=ReservationStatus.CANCELED
+                                && r.getStatus()!=ReservationStatus.CHECKED_OUT)
+                .toList();
+    }
+
     public List<Reservation> fetchByOverlappingDates(Date startDate, Date endDate){
         return tempData.stream()
                 .filter(r->
-                        (r.getStartDate().compareTo(startDate)<0 && r.getEndDate().compareTo(endDate)>0))
+                        (r.getStartDate().compareTo(startDate)<0 && r.getEndDate().compareTo(endDate)>0)
+                        && r.getStatus()!=ReservationStatus.CANCELED
+                        && r.getStatus()!=ReservationStatus.CHECKED_OUT)
                 .toList();
     }
 
@@ -69,6 +80,8 @@ public class ReservationDAO {
          return tempData.stream().filter(reservation->
                  (reservation.getStartDate().compareTo(r.getEndDate())<0 && reservation.getEndDate().compareTo(r.getStartDate())>0)
                  && reservation.getRoomId() == r.getRoomId()
+                 && reservation.getStatus()!=ReservationStatus.CANCELED
+                 && reservation.getStatus()!=ReservationStatus.CHECKED_OUT
                  && reservation.getId() != r.getId())
                 .toList();
     }
