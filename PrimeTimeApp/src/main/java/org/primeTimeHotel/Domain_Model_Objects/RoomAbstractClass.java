@@ -1,8 +1,18 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class RoomAbstractClass {
+
+    public static class Bed{
+        public enum BedType{SINGLE, DOUBLE, QUEEN};
+        private BedType type;
+        Bed(){}
+        public void setType(BedType type){this.type = type;}
+        public BedType getType() {return type;}
+
+    }
     public enum QualityLevel {
         EXECUTIVE, BUSINESS, COMFORT, ECONOMY
     }
@@ -10,21 +20,21 @@ public abstract class RoomAbstractClass {
     private int roomNumber;
     private QualityLevel qualityLevel;
 
-    //To be changed by logan
+    //To be changed by logan --CHANGED!
     private int floor;
     private double currentRate;
     private boolean smokerStatus;
 
-    //Also to be change by logan
-    private String beds;
+    //Also to be changed by logan --CHANGED!
+    private ArrayList<Bed> beds;
 
     ///Accessors and Mutators
-    public String getBeds() {
+    public ArrayList<Bed> getBeds() {
         return beds;
     }
 
-    public void setBeds(String beds) {
-        this.beds = beds;
+    public void setBeds(Bed newBeds) {
+        beds.add(newBeds);
     }
     public int getRoomNumber() {
         return roomNumber;
