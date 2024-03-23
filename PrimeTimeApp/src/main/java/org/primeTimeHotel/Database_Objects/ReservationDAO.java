@@ -12,13 +12,13 @@ public class ReservationDAO {
 
     ReservationDAO(){
         tempData = Arrays.asList(
-                new Reservation(1,69,34,new Date(2024,3,18),new Date(2024,3,19), ReservationStatus.SCHEDULED),
-                new Reservation(2,65,34,new Date(2024,3,16),new Date(2024,3,20),ReservationStatus.CANCELED),
-                new Reservation(3,23,34,new Date(2024,3,19),new Date(2024,3,22),ReservationStatus.CHECKED_IN),
-                new Reservation(4,23,33,new Date(2023,11,27),new Date(2024,11,30),ReservationStatus.CHECKED_OUT),
-                new Reservation(5,43,31,new Date(2022,12,27),new Date(2023,1,5),ReservationStatus.CANCELED),
-                new Reservation(6,24,26,new Date(1987,7,6),new Date(1987,7,12),ReservationStatus.CHECKED_OUT)
-                );
+            new Reservation(1,69,34,new Date(2024,3,18),new Date(2024,3,19), ReservationStatus.SCHEDULED),
+            new Reservation(2,65,34,new Date(2024,3,16),new Date(2024,3,20),ReservationStatus.CANCELED),
+            new Reservation(3,23,34,new Date(2024,3,19),new Date(2024,3,22),ReservationStatus.CHECKED_IN),
+            new Reservation(4,23,33,new Date(2023,11,27),new Date(2024,11,30),ReservationStatus.CHECKED_OUT),
+            new Reservation(5,43,31,new Date(2022,12,27),new Date(2023,1,5),ReservationStatus.CANCELED),
+            new Reservation(6,24,26,new Date(1987,7,6),new Date(1987,7,12),ReservationStatus.CHECKED_OUT)
+        );
     }
 
     public Reservation fetchReservation(int reservationId){

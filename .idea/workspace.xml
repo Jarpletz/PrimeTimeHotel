@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87289fb2-c93f-4042-b062-a915770a1af3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/DatabaseObjectsPackage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/DomainPackage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Services/ServicesPackage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/UI/UIPackage.java" afterDir="false" />
+    <list default="true" id="87289fb2-c93f-4042-b062-a915770a1af3" name="Changes" comment="push">
+      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ExampleDatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ReservationDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +24,27 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;akarthur04&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="Jarpletz" />
+        <option name="repository" value="PrimeTimeHotel" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="07004e3f-406b-4f31-9291-19a086ead35d" />
+        <option name="url" value="https://github.com/Jarpletz/PrimeTimeHotel.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -33,28 +54,39 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2dvoOd6WxYZiQt6yurfNE5OPOHm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ExampleDatabaseConnection.executor": "Run",
+    "Application.ReservationDAO.executor": "Run",
+    "Maven.PrimeTimeApp [install].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
+    "git-widget-placeholder": "addingPayementInformation",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propGUI",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver"
+    ]
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-f644763e9732-c0c073db" />
       </set>
     </attachedChunks>
   </component>
@@ -68,10 +100,46 @@
       <updated>1710897882964</updated>
       <workItem from="1710897887160" duration="343000" />
       <workItem from="1710898299873" duration="308000" />
+      <workItem from="1710944529372" duration="2645000" />
+      <workItem from="1711143315320" duration="698000" />
+      <workItem from="1711169394250" duration="156000" />
+      <workItem from="1711169586667" duration="11620000" />
     </task>
+    <task id="LOCAL-00001" summary="Adding Payment Information class to be used for later">
+      <option name="closed" value="true" />
+      <created>1710945540641</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710945540641</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Adding Payment Information class to be used for later">
+      <option name="closed" value="true" />
+      <created>1710945888022</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710945888022</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Adding Payment Information class to be used for later" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Payment Information class to be used for later" />
   </component>
 </project>
