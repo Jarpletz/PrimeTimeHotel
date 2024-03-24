@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87289fb2-c93f-4042-b062-a915770a1af3" name="Changes" comment="Changed Reservation and ReservationStatus">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ReservationDAO.java" afterDir="false" />
     </list>
@@ -67,7 +68,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging AddRoom__Case",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
