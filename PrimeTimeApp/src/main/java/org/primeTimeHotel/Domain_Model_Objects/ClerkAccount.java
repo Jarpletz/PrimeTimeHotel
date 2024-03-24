@@ -7,6 +7,12 @@ public class ClerkAccount extends Account {
     // Constructor for ClerkAccount
     public ClerkAccount(String username, String password, String firstName, String lastName, String phoneNumber, String email) {
         super(username, password, firstName, lastName, phoneNumber, email);
+        setType(Type.CLERK);
+    }
+
+    public ClerkAccount(){
+        super();
+        setType(Type.CLERK);
     }
 
     // You can add additional methods specific to GuestAccount here
