@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationDAO extends  MasterDAO {
-    private List<Reservation> tempData;
-
+public class ReservationDAO extends MasterDAO {
     public Reservation fetchReservation(int reservationId){
         String sql = "SELECT * FROM reservations WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -157,13 +155,13 @@ public class ReservationDAO extends  MasterDAO {
         return deleteReservation(r.getId());
     }
 
+
+
     private List<Reservation> fetchReservations(PreparedStatement statement) {
-        if (connection != null) {
-            try {
-                return resultSetToReservationList(statement.executeQuery());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            return resultSetToReservationList(statement.executeQuery());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
