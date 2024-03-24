@@ -69,6 +69,12 @@ public class RoomDAO extends MasterDAO{
                 room.getQualityLevel().equals(quality)).collect(Collectors.toList());
     }
 
+    public List<RoomAbstractClass> getAvailable(List<RoomAbstractClass> notAvailable, int floorNumber){
+        return tempRooms.stream().filter(room ->
+                !notAvailable.contains(room) && room.getFloor() ==
+                        floorNumber).collect(Collectors.toList());
+    }
+
 
     private List<RoomAbstractClass> resultSetToRoomList(ResultSet rs) throws SQLException {
         List<RoomAbstractClass> rooms= new ArrayList<>();
