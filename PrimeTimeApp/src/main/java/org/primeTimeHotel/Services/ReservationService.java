@@ -51,4 +51,16 @@ public class ReservationService {
         return reservationDAO.fetchByUserList(userIds);
     }
 
+    public List<RoomAbstractClass> searchForRoom(Date startDate, Date endDate, int floor){
+        //Fetch conflicting rooms first
+        List<Reservation> conflictingRooms = reservationDAO.fetchByOverlappingDates(startDate,endDate);
+        List<Integer> conflictingRoomIDs = conflictingRooms.stream().map(Reservation::getRoomId).toList();
+
+        //get rooms that dont have those room ID's and match floor number
+        //return roomDAO.fetchRoom(conflictingRoomIDs, floor);
+
+        //FIXME add line above when logan creates the RoomDAO
+        return new ArrayList<>();
+    }
+
 }
