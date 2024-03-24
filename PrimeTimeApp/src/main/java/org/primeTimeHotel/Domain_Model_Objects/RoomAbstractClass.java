@@ -7,10 +7,11 @@ public class RoomAbstractClass {
     public enum RoomType{
         SINGLE, DOUBLE, FAMILY, SUITE,STANDARD, DELUXE
     }
-    public static class Bed{
+    public class Bed{
         public enum BedType{SINGLE, DOUBLE, QUEEN};
         private BedType type;
         Bed(){}
+        Bed(BedType type){this.type = type;}
         public void setType(BedType type){this.type = type;}
         public BedType getType() {return type;}
 
