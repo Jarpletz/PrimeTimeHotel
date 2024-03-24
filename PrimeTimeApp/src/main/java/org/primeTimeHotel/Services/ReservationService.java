@@ -2,7 +2,6 @@ package org.primeTimeHotel.Services;
 
 import org.primeTimeHotel.Database_Objects.ReservationDAO;
 import org.primeTimeHotel.Domain_Model_Objects.Reservation;
-import org.primeTimeHotel.Domain_Model_Objects.RoomAbstractClass;
 
 import java.util.ArrayList;
 import java.sql.Date;
@@ -50,5 +49,4 @@ public class ReservationService {
         //TODO: get a list of all user IDs here whose accountInfo matches what was searched
         return reservationDAO.fetchByUserList(userIds);
     }
-
 }
