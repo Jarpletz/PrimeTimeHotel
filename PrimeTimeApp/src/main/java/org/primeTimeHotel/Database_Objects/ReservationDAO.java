@@ -10,6 +10,7 @@ import java.util.*;
 public class ReservationDAO {
     private List<Reservation> tempData;
 
+
     public ReservationDAO(){
         tempData = new ArrayList<Reservation>();
 
@@ -32,8 +33,6 @@ public class ReservationDAO {
         catch(FileNotFoundException e){
             System.out.println("Error: Reservation CSV FIle Not Found!");
         }
-
-
     }
 
     public Reservation fetchReservation(int reservationId){
