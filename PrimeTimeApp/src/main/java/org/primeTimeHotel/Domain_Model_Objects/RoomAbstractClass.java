@@ -17,6 +17,7 @@ public abstract class RoomAbstractClass {
         EXECUTIVE, BUSINESS, COMFORT, ECONOMY
     }
 
+    private int id;
     private int roomNumber;
     private QualityLevel qualityLevel;
 
@@ -29,6 +30,14 @@ public abstract class RoomAbstractClass {
     private ArrayList<Bed> beds;
 
     ///Accessors and Mutators
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public ArrayList<Bed> getBeds() {
         return beds;
     }
