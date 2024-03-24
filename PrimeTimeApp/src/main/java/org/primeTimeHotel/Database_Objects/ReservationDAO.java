@@ -1,7 +1,6 @@
 package org.primeTimeHotel.Database_Objects;
 
 import org.primeTimeHotel.Domain_Model_Objects.Reservation;
-import org.primeTimeHotel.Domain_Model_Objects.ReservationStatus;
 
 import java.sql.*;
 import java.sql.SQLException;
@@ -48,8 +47,8 @@ public class ReservationDAO extends  MasterDAO {
         String sql = "SELECT * FROM Reservations WHERE user_id = ? AND status IN (?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, userId);
-            statement.setInt(2, ReservationStatus.CHECKED_IN.getCode());
-            statement.setInt(3, ReservationStatus.SCHEDULED.getCode());
+            statement.setInt(2, Reservation.Status.CHECKED_IN.getCode());
+            statement.setInt(3, Reservation.Status.SCHEDULED.getCode());
             return fetchReservations(statement);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,8 +60,8 @@ public class ReservationDAO extends  MasterDAO {
         String placeholders = String.join(",", java.util.Collections.nCopies(userIds.size(), "?"));
         String sql = "SELECT * FROM Reservations WHERE status IN (?, ?) AND user_id IN (" + placeholders + ")";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, ReservationStatus.CHECKED_IN.getCode());
-            statement.setInt(2, ReservationStatus.SCHEDULED.getCode());
+            statement.setInt(1, Reservation.Status.CHECKED_IN.getCode());
+            statement.setInt(2, Reservation.Status.SCHEDULED.getCode());
             for (int i = 0; i < userIds.size(); i++)
                 statement.setInt(i + 1, userIds.get(i));
             return fetchReservations(statement);
@@ -77,8 +76,8 @@ public class ReservationDAO extends  MasterDAO {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setDate(1, new java.sql.Date(endDate.getTime()));
             statement.setDate(2, new java.sql.Date(startDate.getTime()));
-            statement.setInt(3, ReservationStatus.CHECKED_IN.getCode());
-            statement.setInt(4, ReservationStatus.SCHEDULED.getCode());
+            statement.setInt(3, Reservation.Status.CHECKED_IN.getCode());
+            statement.setInt(4, Reservation.Status.SCHEDULED.getCode());
             return fetchReservations(statement);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,8 +92,8 @@ public class ReservationDAO extends  MasterDAO {
             statement.setDate(1, r.getEndDate());
             statement.setDate(2, r.getStartDate());
             statement.setInt(3, r.getRoomId());
-            statement.setInt(4, ReservationStatus.CHECKED_IN.getCode());
-            statement.setInt(5, ReservationStatus.SCHEDULED.getCode());
+            statement.setInt(4, Reservation.Status.CHECKED_IN.getCode());
+            statement.setInt(5, Reservation.Status.SCHEDULED.getCode());
             statement.setInt(6, r.getId());
             return fetchReservations(statement);
         } catch (SQLException e) {
@@ -112,7 +111,7 @@ public class ReservationDAO extends  MasterDAO {
                 statement.setInt(2, r.getRoomId());
                 statement.setDate(3,r.getStartDate());
                 statement.setDate(4,r.getEndDate());
-                statement.setInt(5, r.getStatus().ordinal());
+                statement.setInt(5, r.getStatus().getCode());
                 return statement.executeUpdate() > 0;
             } catch (SQLException e) {
                 e.printStackTrace();

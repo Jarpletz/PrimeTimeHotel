@@ -1,16 +1,43 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class Reservation {
+    public enum Status {
+        CHECKED_IN(0),
+        CHECKED_OUT(1),
+        SCHEDULED(2),
+        CANCELED(3);
+
+        private final int code;
+
+        Status(int code) {
+            this.code = code;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static Reservation.Status fromCode(int code) {
+            for (Reservation.Status type: Reservation.Status.values()) {
+                if (type.getCode() == code) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("Invalid code: " + code);
+        }
+    }
     private int id;
     private int userId;
     private int roomId;
     private Date startDate;
     private Date endDate;
 
-    private ReservationStatus status;
+    private Status status;
 
     public Reservation(){
         id = -1;
@@ -18,7 +45,7 @@ public class Reservation {
         roomId = -1;
         startDate = null;
         endDate = null;
-        status = ReservationStatus.SCHEDULED;
+        status = Status.SCHEDULED;
     }
 
     public Reservation(int userId, int roomId,Date startDate,Date endDate){
@@ -26,7 +53,17 @@ public class Reservation {
         setRoomId(roomId);
         setStartDate(startDate);
         setEndDate(endDate);
-        status = ReservationStatus.SCHEDULED;
+        status = Status.SCHEDULED;
+    }
+    public Reservation(ResultSet resultSet) throws SQLException {
+        this(
+                resultSet.getInt("user_id"),
+                resultSet.getInt("room_id"),
+                resultSet.getDate("start_date"),
+                resultSet.getDate("end_date")
+        );
+        this.id = resultSet.getInt("id");
+        this.status = Status.fromCode(resultSet.getInt("status"));
     }
 
     public int getId() {
@@ -44,7 +81,7 @@ public class Reservation {
     public Date getEndDate() {
         return endDate;
     }
-    public ReservationStatus getStatus(){return status;}
+    public Status getStatus(){return status;}
 
     public void setId(int id) {
         this.id = id;
@@ -62,7 +99,7 @@ public class Reservation {
         this.endDate = endDate;
     }
 
-    public void setStatus(ReservationStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
