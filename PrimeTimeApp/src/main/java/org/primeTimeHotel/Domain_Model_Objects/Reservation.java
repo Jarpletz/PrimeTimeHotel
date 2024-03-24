@@ -1,6 +1,6 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 public class Reservation {
@@ -27,12 +27,6 @@ public class Reservation {
         setStartDate(startDate);
         setEndDate(endDate);
         status = ReservationStatus.SCHEDULED;
-    }
-
-    public  Reservation(int id, int userId, int roomId,Date startDate,Date endDate,ReservationStatus status){
-        this(userId,roomId,startDate,endDate);
-        setId(id);
-        setStatus(status);
     }
 
     public int getId() {
