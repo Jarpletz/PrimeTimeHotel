@@ -69,9 +69,9 @@ public class RoomDAO extends MasterDAO{
                 room.getQualityLevel().equals(quality)).collect(Collectors.toList());
     }
 
-    public List<RoomAbstractClass> getAvailable(List<RoomAbstractClass> notAvailable, int floorNumber){
+    public List<RoomAbstractClass> getAvailable(List<Integer> notAvailable, int floorNumber){
         return tempRooms.stream().filter(room ->
-                !notAvailable.contains(room) && room.getFloor() ==
+                !notAvailable.contains(room.getRoomNumber()) && room.getFloor() ==
                         floorNumber).collect(Collectors.toList());
     }
 
@@ -79,7 +79,7 @@ public class RoomDAO extends MasterDAO{
     private List<RoomAbstractClass> resultSetToRoomList(ResultSet rs) throws SQLException {
         List<RoomAbstractClass> rooms= new ArrayList<>();
         while (rs.next()) {
-            RoomAbstractClass room = null; //NEEDS TO BE CHANGED -- Perhaps change Room class to non-abstract or create a instance creations method within the abstract class.
+            RoomAbstractClass room = null; //FIXME NEEDS TO BE CHANGED -- Perhaps change Room class to non-abstract or create a instance creations method within the abstract class.
             room.setId(rs.getInt("id"));
             room.setRoomNumber(rs.getInt("room_number"));
             room.setBeds(rs.getObject("room_beds", RoomAbstractClass.Bed.class));
