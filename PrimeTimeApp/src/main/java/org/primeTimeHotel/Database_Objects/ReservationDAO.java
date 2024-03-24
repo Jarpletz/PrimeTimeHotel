@@ -3,22 +3,36 @@ package org.primeTimeHotel.Database_Objects;
 import org.primeTimeHotel.Domain_Model_Objects.Reservation;
 import org.primeTimeHotel.Domain_Model_Objects.ReservationStatus;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class ReservationDAO {
     private List<Reservation> tempData;
 
-    ReservationDAO(){
-        tempData = Arrays.asList(
-            new Reservation(1,69,34,new Date(2024,3,18),new Date(2024,3,19), ReservationStatus.SCHEDULED),
-            new Reservation(2,65,34,new Date(2024,3,16),new Date(2024,3,20),ReservationStatus.CANCELED),
-            new Reservation(3,23,34,new Date(2024,3,19),new Date(2024,3,22),ReservationStatus.CHECKED_IN),
-            new Reservation(4,23,33,new Date(2023,11,27),new Date(2024,11,30),ReservationStatus.CHECKED_OUT),
-            new Reservation(5,43,31,new Date(2022,12,27),new Date(2023,1,5),ReservationStatus.CANCELED),
-            new Reservation(6,24,26,new Date(1987,7,6),new Date(1987,7,12),ReservationStatus.CHECKED_OUT)
-        );
+
+    public ReservationDAO(){
+        tempData = new ArrayList<Reservation>();
+
+        File myFile = new File("src/main/resources/org/primeTimeHotel/reservationsTemp.csv");
+        try{
+            Scanner myReader = new Scanner(myFile);
+            while (myReader.hasNextLine()) {
+                String line = myReader.nextLine();
+                String[] data = line.split(",");
+                tempData.add(new Reservation(
+                        Integer.parseInt(data[0]),
+                        Integer.parseInt(data[1]),
+                        Integer.parseInt(data[2]),
+                        new Date(Long.parseLong(data[3])),
+                        new Date(Long.parseLong(data[4])),
+                        ReservationStatus.values()[Integer.parseInt(data[5])]
+                ));
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Error: Reservation CSV FIle Not Found!");
+        }
     }
 
     public Reservation fetchReservation(int reservationId){
@@ -43,17 +57,31 @@ public class ReservationDAO {
                 .toList();
     }
 
+    public List<Reservation> fetchByUserList(List<Integer> userIds){
+        return tempData.stream()
+                .filter(r->
+                                userIds.contains(r.getUserId())
+                                && r.getStatus()!=ReservationStatus.CANCELED
+                                && r.getStatus()!=ReservationStatus.CHECKED_OUT)
+                .toList();
+    }
+
     public List<Reservation> fetchByOverlappingDates(Date startDate, Date endDate){
         return tempData.stream()
                 .filter(r->
-                        r.getStartDate().compareTo(endDate)<0 || r.getEndDate().compareTo(startDate)>0)
+                        (r.getStartDate().compareTo(startDate)<0 && r.getEndDate().compareTo(endDate)>0)
+                        && r.getStatus()!=ReservationStatus.CANCELED
+                        && r.getStatus()!=ReservationStatus.CHECKED_OUT)
                 .toList();
     }
 
     public List<Reservation> fetchConflictingReservations(Reservation r){
          return tempData.stream().filter(reservation->
-                 (reservation.getStartDate().compareTo(r.getEndDate())<0 || reservation.getEndDate().compareTo(r.getStartDate())>0)
-                 && r.getRoomId() == r.getRoomId() )
+                 (reservation.getStartDate().compareTo(r.getEndDate())<0 && reservation.getEndDate().compareTo(r.getStartDate())>0)
+                 && reservation.getRoomId() == r.getRoomId()
+                 && reservation.getStatus()!=ReservationStatus.CANCELED
+                 && reservation.getStatus()!=ReservationStatus.CHECKED_OUT
+                 && reservation.getId() != r.getId())
                 .toList();
     }
 
@@ -90,6 +118,7 @@ public class ReservationDAO {
     public boolean deleteReservation(Reservation r){
         return tempData.remove(r);
     }
+
 
 
 }
