@@ -73,7 +73,7 @@ public class RoomDAO extends MasterDAO{
     private List<RoomAbstractClass> resultSetToRoomList(ResultSet rs) throws SQLException {
         List<RoomAbstractClass> rooms= new ArrayList<>();
         while (rs.next()) {
-            RoomAbstractClass room = new RoomAbstractClass();
+            RoomAbstractClass room = null; //NEEDS TO BE CHANGED -- Perhaps change Room class to non-abstract or create a instance creations method within the abstract class.
             room.setId(rs.getInt("id"));
             room.setRoomNumber(rs.getInt("room_number"));
             room.setBeds(rs.getObject("room_beds", RoomAbstractClass.Bed.class));

@@ -3,7 +3,7 @@ package org.primeTimeHotel.Domain_Model_Objects;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class RoomAbstractClass {
+public abstract class RoomAbstractClass {
 
     public static class Bed{
         public enum BedType{SINGLE, DOUBLE, QUEEN};
