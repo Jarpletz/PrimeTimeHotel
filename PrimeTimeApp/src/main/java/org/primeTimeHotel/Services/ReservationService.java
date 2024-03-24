@@ -1,6 +1,8 @@
 package org.primeTimeHotel.Services;
 
 import org.primeTimeHotel.Database_Objects.ReservationDAO;
+import org.primeTimeHotel.Database_Objects.RoomDAO;
+import org.primeTimeHotel.Domain_Model_Objects.GuestAccount;
 import org.primeTimeHotel.Domain_Model_Objects.Reservation;
 import org.primeTimeHotel.Domain_Model_Objects.RoomAbstractClass;
 
@@ -11,6 +13,7 @@ import java.util.List;
 public class ReservationService {
 
     ReservationDAO reservationDAO;
+    RoomDAO roomDAO;
 
     public ReservationService(){
         reservationDAO = new ReservationDAO();
@@ -57,10 +60,12 @@ public class ReservationService {
         List<Integer> conflictingRoomIDs = conflictingRooms.stream().map(Reservation::getRoomId).toList();
 
         //get rooms that dont have those room ID's and match floor number
-        //return roomDAO.fetchRoom(conflictingRoomIDs, floor);
+        return roomDAO.getAvailable(conflictingRoomIDs, floor);
 
-        //FIXME add line above when logan creates the RoomDAO
-        return new ArrayList<>();
+    }
+
+    public void selectRoom(GuestAccount account, RoomAbstractClass roomToBeSelected, Date startDate, Date endDate){
+       // createReservation(startDate,endDate, roomToBeSelected.getId(),account.)
     }
 
 }

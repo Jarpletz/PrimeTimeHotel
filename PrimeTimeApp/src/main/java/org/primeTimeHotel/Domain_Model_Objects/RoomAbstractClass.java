@@ -33,7 +33,7 @@ public class RoomAbstractClass {
         beds = new ArrayList<>();
         smokerStatus = false;
     }
-    private int id;
+
     private static int roomID = 0;
     private int roomNumber;
     private QualityLevel qualityLevel;
@@ -48,11 +48,11 @@ public class RoomAbstractClass {
 
     ///Accessors and Mutators
     public void setId(int id) {
-        this.id = id;
+        this.roomID = id;
     }
 
     public int getId() {
-        return id;
+        return roomID;
     }
 
     public void setQualityLevel(QualityLevel qualityLevel) {
