@@ -5,12 +5,13 @@ import java.sql.*;
 public class ExampleDAO extends MasterDAO {
     ResultSet select() {
         ResultSet rs = null;
+        if (connection != null) {
         try {
             Statement statement = connection.createStatement();
-            String selectDataSql = "SELECT * FROM test_table";
-            rs = statement.executeQuery(selectDataSql);
+            rs = statement.executeQuery("SELECT * FROM test_table");
         } catch (SQLException e) {
             e.printStackTrace();
+        }
         }
         return rs;
     }

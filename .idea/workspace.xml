@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87289fb2-c93f-4042-b062-a915770a1af3" name="Changes" comment="Did not need the top statement">
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/MasterDAO.java" afterDir="false" />
+    <list default="true" id="87289fb2-c93f-4042-b062-a915770a1af3" name="Changes" comment="Added a MasterDAO object to be inherited by all DAO's">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ExampleDatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ExampleDatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ExampleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ExampleDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/MasterDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/MasterDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +68,7 @@
     "Maven.PrimeTimeApp [install].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
     "git-widget-placeholder": "addedExampleDatabaseConnection",
     "kotlin-language-version-configured": "true",
@@ -103,7 +107,7 @@
       <workItem from="1710944529372" duration="2645000" />
       <workItem from="1711143315320" duration="698000" />
       <workItem from="1711169394250" duration="156000" />
-      <workItem from="1711169586667" duration="13435000" />
+      <workItem from="1711169586667" duration="16182000" />
     </task>
     <task id="LOCAL-00001" summary="Adding Payment Information class to be used for later">
       <option name="closed" value="true" />
@@ -137,7 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711216218499</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added a MasterDAO object to be inherited by all DAO's">
+      <option name="closed" value="true" />
+      <created>1711217097836</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1711217097836</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +170,7 @@
     <MESSAGE value="Adding Payment Information class to be used for later" />
     <MESSAGE value="Created a database and added and example on how to connect :)" />
     <MESSAGE value="Did not need the top statement" />
-    <option name="LAST_COMMIT_MESSAGE" value="Did not need the top statement" />
+    <MESSAGE value="Added a MasterDAO object to be inherited by all DAO's" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a MasterDAO object to be inherited by all DAO's" />
   </component>
 </project>
