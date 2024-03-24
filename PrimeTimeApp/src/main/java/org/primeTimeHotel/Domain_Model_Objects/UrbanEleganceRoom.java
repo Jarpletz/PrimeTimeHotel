@@ -4,15 +4,6 @@ import java.util.Objects;
 
 public class UrbanEleganceRoom extends RoomAbstractClass{
 
-    private RoomType roomType;
-
-    public RoomType getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(RoomType roomType) {
-        this.roomType = roomType;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -20,11 +11,11 @@ public class UrbanEleganceRoom extends RoomAbstractClass{
         if (this == o) return true;
         if (!(o instanceof UrbanEleganceRoom that)) return false;
         if (!super.equals(o)) return false;
-        return getRoomType() == that.getRoomType();
+        return getType() == that.getType();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getRoomType());
+        return Objects.hash(super.hashCode(), getType());
     }
 }

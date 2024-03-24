@@ -58,10 +58,8 @@ public class ReservationDAO extends  MasterDAO {
 
     public List<Reservation> fetchByUserList(List<Integer> userIds) {
         String placeholders = String.join(",", java.util.Collections.nCopies(userIds.size(), "?"));
-        String sql = "SELECT * FROM Reservations WHERE status IN (?, ?) AND user_id IN (" + placeholders + ")";
+        String sql = "SELECT * FROM Reservations WHERE status IN (0, 2) AND user_id IN (" + placeholders + ")";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, Reservation.Status.CHECKED_IN.getCode());
-            statement.setInt(2, Reservation.Status.SCHEDULED.getCode());
             for (int i = 0; i < userIds.size(); i++)
                 statement.setInt(i + 1, userIds.get(i));
             return fetchReservations(statement);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class RoomAbstractClass {
-    protected enum RoomType{
+    public enum RoomType{
         SINGLE, DOUBLE, FAMILY, SUITE,STANDARD, DELUXE
     }
     public static class Bed{
@@ -42,6 +42,7 @@ public class RoomAbstractClass {
     private int floor;
     private double currentRate;
     private boolean smokerStatus;
+    private RoomType type;
 
     //Also to be changed by logan --CHANGED!
     private ArrayList<Bed> beds;
@@ -102,6 +103,14 @@ public class RoomAbstractClass {
         this.smokerStatus = smokerStatus;
     }
 
+    public RoomType getType() {
+        return type;
+    }
+
+    public void setType(RoomType type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,7 +122,6 @@ public class RoomAbstractClass {
     public int hashCode() {
         return Objects.hash(getRoomNumber(), qualityLevel, getFloor(), getCurrentRate(), isSmokerStatus(), getBeds());
     }
-
 
 
 }
