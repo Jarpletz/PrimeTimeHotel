@@ -14,17 +14,11 @@ import java.util.Scanner;
 public class ReservationDAO extends  MasterDAO {
     private List<Reservation> tempData;
 
-
-    public ReservationDAO(){
-        super();
-    }
-
     public Reservation fetchReservation(int reservationId){
         if(connection == null) return null;
-        try {
-            PreparedStatement statement =connection.prepareStatement("SELECT * FROM reservations WHERE id = ?");
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM reservations WHERE id = ?")){
             statement.setInt(1,reservationId);
-            ResultSet  rs= statement.executeQuery();
+            ResultSet rs = statement.executeQuery();
             List<Reservation> reservations = resultSetToReservationList(rs);
             if(reservations.isEmpty()) return null;
             return  reservations.getFirst();
@@ -148,14 +142,7 @@ public class ReservationDAO extends  MasterDAO {
     private List<Reservation> resultSetToReservationList(ResultSet rs) throws SQLException {
         List<Reservation> reservations= new ArrayList<>();
         while (rs.next()) {
-            Reservation reservation = new Reservation();
-            reservation.setId(rs.getInt("id"));
-            reservation.setUserId(rs.getInt("user_id"));
-            reservation.setRoomId(rs.getInt("room_id"));
-            reservation.setStartDate(rs.getDate("start_date"));
-            reservation.setEndDate(rs.getDate("end_date"));
-            reservation.setStatus(ReservationStatus.values()[rs.getInt("status")]);
-            reservations.add(reservation);
+            reservations.add(new Reservation(rs));
         }
         return reservations;
     }
