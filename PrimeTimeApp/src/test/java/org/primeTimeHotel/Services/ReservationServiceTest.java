@@ -37,5 +37,6 @@ public class ReservationServiceTest {
         List<RoomAbstractClass> avalibleRooms = reservationService.getAvalibleRooms(startDate, endDate, 1);
         //fixmE to be fixed at a later date.
 
+
     }
 }
