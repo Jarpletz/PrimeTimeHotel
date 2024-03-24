@@ -5,49 +5,64 @@ import org.primeTimeHotel.Domain_Model_Objects.ReservationStatus;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.sql.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-public class ReservationDAO {
+public class ReservationDAO extends  MasterDAO {
     private List<Reservation> tempData;
 
 
     public ReservationDAO(){
-        tempData = new ArrayList<Reservation>();
-
-        File myFile = new File("src/main/resources/org/primeTimeHotel/reservationsTemp.csv");
-        try{
-            Scanner myReader = new Scanner(myFile);
-            while (myReader.hasNextLine()) {
-                String line = myReader.nextLine();
-                String[] data = line.split(",");
-                tempData.add(new Reservation(
-                        Integer.parseInt(data[0]),
-                        Integer.parseInt(data[1]),
-                        Integer.parseInt(data[2]),
-                        new Date(Long.parseLong(data[3])),
-                        new Date(Long.parseLong(data[4])),
-                        ReservationStatus.values()[Integer.parseInt(data[5])]
-                ));
-            }
-        }
-        catch(FileNotFoundException e){
-            System.out.println("Error: Reservation CSV FIle Not Found!");
-        }
+        super();
     }
 
     public Reservation fetchReservation(int reservationId){
-        for(Reservation r : tempData) {
-            if(r.getId() == reservationId) return r;
+        if(connection == null) return null;
+        try {
+            PreparedStatement statement =connection.prepareStatement("SELECT * FROM reservations WHERE id = ?");
+            statement.setInt(1,reservationId);
+            ResultSet  rs= statement.executeQuery();
+            List<Reservation> reservations = resultSetToReservationList(rs);
+            if(reservations.isEmpty()) return null;
+            return  reservations.getFirst();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public List<Reservation> fetchAllReservations(){
-        return tempData;
+        List<Reservation> reservations = new ArrayList<>();
+        if (connection != null) {
+            try {
+                PreparedStatement statement =connection.prepareStatement("SELECT * FROM reservations");
+                ResultSet  rs= statement.executeQuery();
+                reservations = resultSetToReservationList(rs);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return reservations;
     }
 
     public List<Reservation> fetchByUserAll(int userId){
-        return tempData.stream().filter(r->r.getUserId() == userId).toList();
+        List<Reservation> reservations = new ArrayList<>();
+        if (connection != null) {
+            try {
+                PreparedStatement statement =connection.prepareStatement("SELECT * FROM reservations WHERE user_id = ?");
+                statement.setInt(1,userId);
+                ResultSet  rs= statement.executeQuery();
+                reservations = resultSetToReservationList(rs);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return reservations;
     }
     public List<Reservation> fetchByUserCurrent(int userId){
         return tempData.stream()
@@ -87,10 +102,21 @@ public class ReservationDAO {
 
     public boolean insertReservation(Reservation r){
         //try to update before inserting a new one
-        if(updateReservation(r)) return true;
-
-        if(r.getId()<0 ) r.setId(tempData.getLast().getId() + 1);
-        tempData.add(r);
+       // if(updateReservation(r)) return true;
+        try{
+            PreparedStatement stmt = connection.prepareStatement(
+                    "INSERT INTO Reservations(user_id,room_id,start_date,end_date,status)" +  " VALUES (?, ?, ?,? ,?)");
+            stmt.setInt(1,r.getUserId());
+            stmt.setInt(2, r.getRoomId());
+            stmt.setDate(3,r.getStartDate());
+            stmt.setDate(4,r.getEndDate());
+            stmt.setInt(5, r.getStatus().ordinal());
+            stmt.executeUpdate();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 
@@ -119,6 +145,19 @@ public class ReservationDAO {
         return tempData.remove(r);
     }
 
-
+    private List<Reservation> resultSetToReservationList(ResultSet rs) throws SQLException {
+        List<Reservation> reservations= new ArrayList<>();
+        while (rs.next()) {
+            Reservation reservation = new Reservation();
+            reservation.setId(rs.getInt("id"));
+            reservation.setUserId(rs.getInt("user_id"));
+            reservation.setRoomId(rs.getInt("room_id"));
+            reservation.setStartDate(rs.getDate("start_date"));
+            reservation.setEndDate(rs.getDate("end_date"));
+            reservation.setStatus(ReservationStatus.values()[rs.getInt("status")]);
+            reservations.add(reservation);
+        }
+        return reservations;
+    }
 
 }

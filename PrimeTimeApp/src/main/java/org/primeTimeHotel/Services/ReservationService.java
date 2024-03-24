@@ -4,7 +4,7 @@ import org.primeTimeHotel.Database_Objects.ReservationDAO;
 import org.primeTimeHotel.Domain_Model_Objects.Reservation;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class ReservationService {
