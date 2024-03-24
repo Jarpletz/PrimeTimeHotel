@@ -3,7 +3,7 @@ package org.primeTimeHotel.Domain_Model_Objects;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public abstract class RoomAbstractClass {
+public class RoomAbstractClass {
 
     protected enum RoomType{
         SINGLE, DOUBLE, FAMILY, SUITE,STANDARD, DELUXE
