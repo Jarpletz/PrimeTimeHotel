@@ -54,7 +54,7 @@ public class ReservationService {
         return reservationDAO.fetchByUserList(userIds);
     }
 
-    public List<RoomAbstractClass> searchForRoom(Date startDate, Date endDate, int floor){
+    public List<RoomAbstractClass> getAvalibleRooms(Date startDate, Date endDate, int floor){
         //Fetch conflicting rooms first
         List<Reservation> conflictingRooms = reservationDAO.fetchByOverlappingDates(startDate,endDate);
         List<Integer> conflictingRoomIDs = conflictingRooms.stream().map(Reservation::getRoomId).toList();
