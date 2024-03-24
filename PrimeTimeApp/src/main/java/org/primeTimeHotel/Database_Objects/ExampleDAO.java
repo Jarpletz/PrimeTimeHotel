@@ -2,7 +2,7 @@ package org.primeTimeHotel.Database_Objects;
 
 import java.sql.*;
 
-public class ExampleDAO extends MasterDAO {
+public class ExampleDAO extends RootDAO {
     ResultSet select() {
         ResultSet rs = null;
         if (connection != null) {

@@ -3,76 +3,112 @@ package org.primeTimeHotel.Database_Objects;
 import org.primeTimeHotel.Domain_Model_Objects.Reservation;
 import org.primeTimeHotel.Domain_Model_Objects.ReservationStatus;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
-public class ReservationDAO {
-    private List<Reservation> tempData;
-
-
-    public ReservationDAO(){
-        tempData = new ArrayList<Reservation>();
-
-        File myFile = new File("src/main/resources/org/primeTimeHotel/reservationsTemp.csv");
-        try{
-            Scanner myReader = new Scanner(myFile);
-            while (myReader.hasNextLine()) {
-                String line = myReader.nextLine();
-                String[] data = line.split(",");
-                tempData.add(new Reservation(
-                        Integer.parseInt(data[0]),
-                        Integer.parseInt(data[1]),
-                        Integer.parseInt(data[2]),
-                        new Date(Long.parseLong(data[3])),
-                        new Date(Long.parseLong(data[4])),
-                        ReservationStatus.values()[Integer.parseInt(data[5])]
-                ));
-            }
-        }
-        catch(FileNotFoundException e){
-            System.out.println("Error: Reservation CSV FIle Not Found!");
-        }
-    }
+public class ReservationDAO extends RootDAO {
+    private List<Reservation> tempData = new ArrayList<>();
 
     public Reservation fetchReservation(int reservationId){
-        for(Reservation r : tempData) {
-            if(r.getId() == reservationId) return r;
+        String sql = "SELECT * FROM Reservations WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, reservationId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Reservation(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     public List<Reservation> fetchAllReservations(){
-        return tempData;
+        List<Reservation> reservations = new ArrayList<>();
+        String sql = "SELECT * FROM Reservations";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                reservations.add(new Reservation(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
     }
 
     public List<Reservation> fetchByUserAll(int userId){
-        return tempData.stream().filter(r->r.getUserId() == userId).toList();
+        List<Reservation> reservations = new ArrayList<>();
+        String sql = "SELECT * FROM Reservations WHERE user_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                reservations.add(new Reservation(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
     }
     public List<Reservation> fetchByUserCurrent(int userId){
-        return tempData.stream()
-                .filter(r->r.getUserId() == userId
-                        && r.getStatus()!=ReservationStatus.CANCELED
-                        && r.getStatus()!=ReservationStatus.CHECKED_OUT)
-                .toList();
+        List<Reservation> reservations = new ArrayList<>();
+        String sql = "SELECT * FROM Reservations WHERE user_id = ? AND (status = ? OR status = ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, ReservationStatus.CHECKED_IN.getCode());
+            statement.setInt(3, ReservationStatus.SCHEDULED.getCode());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                reservations.add(new Reservation(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
     }
 
     public List<Reservation> fetchByUserList(List<Integer> userIds){
-        return tempData.stream()
-                .filter(r->
-                                userIds.contains(r.getUserId())
-                                && r.getStatus()!=ReservationStatus.CANCELED
-                                && r.getStatus()!=ReservationStatus.CHECKED_OUT)
-                .toList();
+        List<Reservation> reservations = new ArrayList<>();
+
+        String placeholders = String.join(",", java.util.Collections.nCopies(userIds.size(), "?"));
+        String sql = "SELECT * FROM Reservations WHERE (status = 0 OR status = 2) AND user_id IN (" + placeholders + ")";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, ReservationStatus.CHECKED_IN.getCode());
+            statement.setInt(2, ReservationStatus.SCHEDULED.getCode());
+            // Set each user ID in the prepared statement
+            for (int i = 0; i < userIds.size(); i++) {
+                statement.setInt(i + 1, userIds.get(i));
+            }
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                reservations.add(new Reservation(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
     }
 
     public List<Reservation> fetchByOverlappingDates(Date startDate, Date endDate){
-        return tempData.stream()
-                .filter(r->
-                        (r.getStartDate().compareTo(startDate)<0 && r.getEndDate().compareTo(endDate)>0)
-                        && r.getStatus()!=ReservationStatus.CANCELED
-                        && r.getStatus()!=ReservationStatus.CHECKED_OUT)
-                .toList();
+        List<Reservation> reservations = new ArrayList<>();
+        String sql = "SELECT * FROM Reservations WHERE NOT (start_date > ? OR end_date < ?) AND status IN (0, 2)";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setDate(1, new java.sql.Date(endDate.getTime()));
+            statement.setDate(2, new java.sql.Date(startDate.getTime()));
+            statement.setInt(3, ReservationStatus.CHECKED_IN.getCode());
+            statement.setInt(4, ReservationStatus.SCHEDULED.getCode());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                reservations.add(new Reservation(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
     }
 
     public List<Reservation> fetchConflictingReservations(Reservation r){
@@ -88,7 +124,6 @@ public class ReservationDAO {
     public boolean insertReservation(Reservation r){
         //try to update before inserting a new one
         if(updateReservation(r)) return true;
-
         if(r.getId()<0 ) r.setId(tempData.getLast().getId() + 1);
         tempData.add(r);
         return true;

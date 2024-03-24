@@ -2,9 +2,9 @@ package org.primeTimeHotel.Database_Objects;
 
 import java.sql.*;
 
-public class MasterDAO {
+public class RootDAO {
     static protected Connection connection = null;
-    MasterDAO() {
+    RootDAO() {
         if (connection == null) {
             try {
                 // Connect to the database

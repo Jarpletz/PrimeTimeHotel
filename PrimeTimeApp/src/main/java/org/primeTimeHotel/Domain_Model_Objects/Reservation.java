@@ -1,5 +1,7 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Objects;
 
@@ -19,6 +21,17 @@ public class Reservation {
         startDate = null;
         endDate = null;
         status = ReservationStatus.SCHEDULED;
+    }
+
+    public Reservation(ResultSet resultSet) throws SQLException {
+        this(
+            resultSet.getInt("id"),
+            resultSet.getInt("user_id"),
+            resultSet.getInt("room_id"),
+            resultSet.getDate("start_date"),
+            resultSet.getDate("end_date"),
+            ReservationStatus.fromCode(resultSet.getInt("status"))
+        );
     }
 
     public Reservation(int userId, int roomId,Date startDate,Date endDate){
