@@ -3,9 +3,7 @@ package org.primeTimeHotel.Domain_Model_Objects;
 import java.util.Objects;
 
 public class NatureRetreatRoom extends RoomAbstractClass {
-    private enum RoomType{
-        SINGLE, DOUBLE, FAMILY
-    }
+
 
     private RoomType roomType;
 
