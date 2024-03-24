@@ -64,8 +64,10 @@ public class ReservationService {
 
     }
 
-    public void selectRoom(GuestAccount account, RoomAbstractClass roomToBeSelected, Date startDate, Date endDate){
-       // createReservation(startDate,endDate, roomToBeSelected.getId(),account.)
+    public Reservation selectRoom(GuestAccount account, RoomAbstractClass roomToBeSelected, Date startDate, Date endDate){
+        Reservation newReservation =  createReservation(startDate,endDate, roomToBeSelected.getId(),account.getId());
+        reservationDAO.insertReservation(newReservation);
+        return newReservation;
     }
 
 }
