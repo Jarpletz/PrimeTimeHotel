@@ -24,6 +24,20 @@ public class AccountDAO extends  MasterDAO{
         return null;
     }
 
+    public Account authenticateAccount(String username, String password){
+        try {
+            PreparedStatement statement =connection.prepareStatement("SELECT * FROM ACCOUNTS WHERE USERNAME = ? AND PASSWORD = ? FETCH FIRST ROW ONLY");
+            statement.setString(1,username);
+            statement.setString(2,password);
+            List<Account> accounts= fetchAccounts(statement);
+            if(!accounts.isEmpty()) return accounts.getFirst();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
     public boolean insert(Account account){
         if(connection== null) return false;
         if(fetchAccount(account.getId())==null){
@@ -155,13 +169,14 @@ public class AccountDAO extends  MasterDAO{
                 newAccount = new ClerkAccount();
             else
                 newAccount = new AdminAccount();
-
+            newAccount.setId(rs.getInt("id"));
             newAccount.setUsername(rs.getString("username"));
             newAccount.setPassword(rs.getString("password"));
             newAccount.setFirstName(rs.getString("first_name"));
             newAccount.setLastName(rs.getString("last_name"));
             newAccount.setPhoneNumber(rs.getString("phone_number"));
             newAccount.setEmail(rs.getString("email"));
+            accounts.add(newAccount);
         }
         return accounts;
     }

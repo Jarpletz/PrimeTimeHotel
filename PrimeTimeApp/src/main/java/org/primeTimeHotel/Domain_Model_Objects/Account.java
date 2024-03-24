@@ -135,4 +135,18 @@ public abstract class Account {
     public int hashCode() {
         return Objects.hash(id, username, password, firstName, lastName, phoneNumber, email, type);
     }
+
+    @Override
+    public String toString() {
+        return "Account{\n" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", type=" + type +
+                "\n}\n";
+    }
 }
