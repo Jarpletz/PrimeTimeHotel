@@ -3,9 +3,6 @@ package org.primeTimeHotel.Domain_Model_Objects;
 import java.util.Objects;
 
 public class UrbanEleganceRoom extends RoomAbstractClass{
-    private enum RoomType{
-        SUITE, DELUXE
-    }
 
     private RoomType roomType;
 
@@ -14,7 +11,10 @@ public class UrbanEleganceRoom extends RoomAbstractClass{
     }
 
     public void setRoomType(RoomType roomType) {
-        this.roomType = roomType;
+        if(roomType.equals(RoomType.SUITE) || roomType.equals(RoomType.DELUXE)){
+            this.roomType = roomType;
+        }
+
     }
 
     @Override
