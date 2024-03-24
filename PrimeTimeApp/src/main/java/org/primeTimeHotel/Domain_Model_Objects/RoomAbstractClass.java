@@ -38,6 +38,14 @@ public abstract class RoomAbstractClass {
         return id;
     }
 
+    public void setQualityLevel(QualityLevel qualityLevel) {
+        this.qualityLevel = qualityLevel;
+    }
+
+    public QualityLevel getQualityLevel() {
+        return qualityLevel;
+    }
+
     public ArrayList<Bed> getBeds() {
         return beds;
     }

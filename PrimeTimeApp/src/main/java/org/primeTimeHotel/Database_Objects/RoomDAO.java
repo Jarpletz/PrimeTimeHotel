@@ -49,10 +49,26 @@ public class RoomDAO extends MasterDAO{
                 room.getRoomNumber() == roomNumber).findFirst().orElse(null);
     }
 
-    public List<RoomAbstractClass> getWithinRoomNumberRange(List<Integer> roomNumbers){
+    public List<RoomAbstractClass> getByRoomNumberList(List<Integer> roomNumbers){
         return tempRooms.stream().filter(room -> roomNumbers.contains
                 (room.getRoomNumber())).collect(Collectors.toList());
     }
+
+    public List<RoomAbstractClass> getByRoomFloor(int roomFloor){
+        return tempRooms.stream().filter(room ->
+                room.getFloor() == roomFloor).collect(Collectors.toList());
+    }
+
+    public List<RoomAbstractClass> getBySmokingStatus(boolean smokeStat){
+        return tempRooms.stream().filter(room ->
+                room.isSmokerStatus() == smokeStat).collect(Collectors.toList());
+    }
+
+    public List<RoomAbstractClass> getByQualityLevel(RoomAbstractClass.QualityLevel quality){
+        return tempRooms.stream().filter(room ->
+                room.getQualityLevel().equals(quality)).collect(Collectors.toList());
+    }
+
 
     private List<RoomAbstractClass> resultSetToRoomList(ResultSet rs) throws SQLException {
         List<RoomAbstractClass> rooms= new ArrayList<>();
