@@ -7,6 +7,7 @@ public class GuestAccount extends Account {
     // Constructor for GuestAccount
     public GuestAccount(String username, String password, String firstName, String lastName, String phoneNumber, String email) {
         super(username, password, firstName, lastName, phoneNumber, email);
+        setType(AccountType.GUEST);
     }
 
     // You can add additional methods specific to GuestAccount here

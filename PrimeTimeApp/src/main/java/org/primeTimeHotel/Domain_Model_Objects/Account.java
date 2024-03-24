@@ -1,12 +1,37 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
 public abstract class Account {
+    public enum AccountType {
+        GUEST(0),
+        CLERK(1),
+        ADMIN(2);
+
+        private final int code;
+
+        AccountType(int code) {
+            this.code = code;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static AccountType fromCode(int code) {
+            for (AccountType type: AccountType.values()) {
+                if (type.getCode() == code) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("Invalid code: " + code);
+        }
+    }
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String email;
+    private  AccountType type;
 
     // Constructor
     public Account(String username, String password, String firstName, String lastName, String phoneNumber, String email) {
@@ -72,5 +97,13 @@ public abstract class Account {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public AccountType getType() {
+        return type;
+    }
+
+    public void setType(AccountType type) {
+        this.type = type;
     }
 }
