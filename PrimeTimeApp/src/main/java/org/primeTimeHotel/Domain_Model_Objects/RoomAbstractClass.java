@@ -3,11 +3,7 @@ package org.primeTimeHotel.Domain_Model_Objects;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class RoomAbstractClass {
-
-    protected enum RoomType{
-        SINGLE, DOUBLE, FAMILY, SUITE,STANDARD, DELUXE
-    }
+public abstract class RoomAbstractClass {
 
     public static class Bed{
         public enum BedType{SINGLE, DOUBLE, QUEEN};
@@ -21,34 +17,35 @@ public class RoomAbstractClass {
         EXECUTIVE, BUSINESS, COMFORT, ECONOMY
     }
 
-    private static int roomID = 0;
+    private int id;
     private int roomNumber;
     private QualityLevel qualityLevel;
 
+    //To be changed by logan --CHANGED!
     private int floor;
     private double currentRate;
     private boolean smokerStatus;
 
-
+    //Also to be changed by logan --CHANGED!
     private ArrayList<Bed> beds;
 
-    public RoomAbstractClass(int floor, int roomNumber, double currentRate, ArrayList<Bed> beds, boolean smokerStatus, QualityLevel qualityLevel){
-        roomID++;
-        this.floor = floor;
-        this.roomNumber = roomNumber;
-        this.currentRate = currentRate;
-        this.beds = beds;
-        this.qualityLevel = qualityLevel;
-        this.smokerStatus = smokerStatus;
-    }
-
-    public RoomAbstractClass(){
-        roomID++;
-        beds = new ArrayList<>();
-        smokerStatus = false;
-    }
-
     ///Accessors and Mutators
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setQualityLevel(QualityLevel qualityLevel) {
+        this.qualityLevel = qualityLevel;
+    }
+
+    public QualityLevel getQualityLevel() {
+        return qualityLevel;
+    }
+
     public ArrayList<Bed> getBeds() {
         return beds;
     }
