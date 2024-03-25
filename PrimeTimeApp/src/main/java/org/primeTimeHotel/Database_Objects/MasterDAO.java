@@ -1,7 +1,6 @@
 package org.primeTimeHotel.Database_Objects;
 
 import org.primeTimeHotel.Domain_Model_Objects.AbstractDomainModelObject;
-import org.primeTimeHotel.Domain_Model_Objects.Reservation;
 
 import java.sql.*;
 
@@ -38,16 +37,13 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
         }
     }
 
-
-
-    public abstract T fetch(int id); // you cannot use the constructor of a generic so this is the workaround
-    protected ResultSet fetchResultSet(int id){
+    public T fetch(int id){
         String sql = "SELECT * FROM " + table_name + " WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if (rs.next())
-                return rs;
+                return initializeEntry(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,7 +51,7 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
     }
 
     public boolean insert(T t){
-        if (fetchResultSet(t.getId()) == null) {
+        if (fetch(t.getId()) == null) {
             String sql =
                 "INSERT INTO " + table_name +
                 "(" + String.join(", ", attribute_names) + ") " +
@@ -112,4 +108,5 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
 
     protected abstract void setStatement(PreparedStatement statement, T t, int parameterIndex) throws SQLException;
     protected void setStatement(PreparedStatement statement, T t) throws SQLException { setStatement(statement, t, 1); }
+    protected abstract T initializeEntry(ResultSet resultSet) throws SQLException;
 }

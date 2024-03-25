@@ -1,9 +1,6 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Objects;
 
 public class Reservation extends AbstractDomainModelObject {
@@ -48,16 +45,6 @@ public class Reservation extends AbstractDomainModelObject {
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = Status.SCHEDULED;
-    }
-    public Reservation(ResultSet resultSet) throws SQLException {
-        this(
-                resultSet.getInt("user_id"),
-                resultSet.getInt("room_id"),
-                resultSet.getDate("start_date"),
-                resultSet.getDate("end_date")
-        );
-        this.id = resultSet.getInt("id");
-        this.status = Status.fromCode(resultSet.getInt("status"));
     }
 
     public int getUserId() {

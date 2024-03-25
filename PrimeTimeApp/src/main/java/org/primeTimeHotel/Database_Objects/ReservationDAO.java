@@ -13,17 +13,6 @@ public class ReservationDAO extends MasterDAO<Reservation> {
     }
 
     @Override
-    public Reservation fetch(int id) {
-        try {
-            ResultSet rs = super.fetchResultSet(id);
-            if (rs != null)
-                return new Reservation(rs);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    @Override
     public void setStatement(PreparedStatement statement, Reservation r, int parameterIndex) throws SQLException {
         statement.setInt(parameterIndex++, r.getUserId());
         statement.setInt(parameterIndex++, r.getRoomId());
@@ -33,6 +22,19 @@ public class ReservationDAO extends MasterDAO<Reservation> {
         if (r.getId() != -1)
             statement.setInt(parameterIndex, r.getId());
     }
+    @Override
+    protected Reservation initializeEntry(ResultSet resultSet) throws SQLException {
+        Reservation r = new Reservation(
+            resultSet.getInt("user_id"),
+            resultSet.getInt("room_id"),
+            resultSet.getDate("start_date"),
+            resultSet.getDate("end_date")
+        );
+        r.setId(resultSet.getInt("id"));
+        r.setStatus(Reservation.Status.fromCode(resultSet.getInt("status")));
+        return r;
+    }
+
 
     public List<Reservation> fetchAll(){
         String sql = "SELECT * FROM reservations";
@@ -125,7 +127,7 @@ public class ReservationDAO extends MasterDAO<Reservation> {
     private List<Reservation> resultSetToReservationList(ResultSet rs) throws SQLException {
         List<Reservation> reservations= new ArrayList<>();
         while (rs.next()) {
-            reservations.add(new Reservation(rs));
+            reservations.add(initializeEntry(rs));
         }
         return reservations;
     }
