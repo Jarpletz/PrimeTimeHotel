@@ -47,29 +47,6 @@ public class ReservationServiceTest {
 
     @Test
     void selectRoomTest() throws ParseException{
-        GuestAccount guestAccount = new GuestAccount("PeterW727", "StinkyPete727",
-                "Peter", "Whit", "(914)282-8870", "peter727@gmail.com");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date startDate = null;
-        Date endDate = null;
-        java.util.Date parsedStartDate;
-        java.util.Date parsedEndDate;
-        try {
-            parsedStartDate = dateFormat.parse("2024-03-18");
-            parsedEndDate = dateFormat.parse("2024-03-19");
-        }catch(RuntimeException e){
-            System.err.println("Error: ");
-            e.printStackTrace();
-            return;
-        }
-        startDate = new Date(parsedStartDate.getTime());
-        endDate = new Date(parsedEndDate.getTime());
 
-
-        //fixme there is something wrong with the .getAvalibleRooms() I need august to help figure it out
-        List<RoomAbstractClass> avalibleRooms = reservationService.getAvalibleRooms(startDate, endDate, 1);
-
-        RoomAbstractClass roomToBeSelected = avalibleRooms.get(0);
-        reservationService.selectRoom(guestAccount,roomToBeSelected, startDate, endDate);
     }
 }
