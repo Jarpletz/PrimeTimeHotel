@@ -8,9 +8,11 @@ import java.sql.*;
 public abstract class MasterDAO<T extends AbstractDomainModelObject> {
     static protected Connection connection = null;
     protected String table_name;
+    protected String[] attribute_names;
 
-    MasterDAO(String table_name) {
+    MasterDAO(String table_name, String[] attribute_names) {
         this.table_name = table_name;
+        this.attribute_names = attribute_names;
         if (connection == null) {
             try {
                 // Connect to the database
@@ -54,11 +56,10 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
 
     public boolean insert(T t){
         if (fetchResultSet(t.getId()) == null) {
-            String[] names = t.getDBAttributeNames();
             String sql =
                 "INSERT INTO " + table_name +
-                "(" + String.join(", ", names) + ") " +
-                "VALUES (" + String.join(", ", java.util.Collections.nCopies(names.length, "?"))+ ")";
+                "(" + String.join(", ", attribute_names) + ") " +
+                "VALUES (" + String.join(", ", java.util.Collections.nCopies(attribute_names.length, "?"))+ ")";
             String[] returnColumns = {"id"};
             try (PreparedStatement statement = connection.prepareStatement(sql, returnColumns)) {
                 t.setId(-1); // should already be, but just incase
@@ -80,9 +81,9 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
 
     public boolean update(T t){
         if (fetch(t.getId()) != null) {
-            String[] items = t.getDBAttributeNames();
+            String[] items = new String[attribute_names.length];
             for (int i = 0; i < items.length; i++)
-                items[i] = items[i] + " = ?";
+                items[i] = attribute_names[i] + " = ?";
             String sql =
                 "UPDATE " + table_name + " " +
                 "SET " + String.join(", ", items) + " " +

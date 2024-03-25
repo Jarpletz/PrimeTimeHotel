@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationDAO extends MasterDAO<Reservation> {
-    private List<Reservation> tempData;
-
     ReservationDAO() {
-        super("reservations");
+        super("reservations", new String[] {"user_id", "room_id", "start_date", "end_date", "status"});
     }
 
     public Reservation fetch(int id) {

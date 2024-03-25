@@ -73,10 +73,6 @@ public class Reservation extends AbstractDomainModelObject {
         if (id != -1)
             statement.setInt(parameterIndex, getId());
     }
-    @Override
-    public String[] getDBAttributeNames() {
-        return new String[] {"user_id", "room_id", "start_date", "end_date", "status"};
-    }
 
     public int getUserId() {
         return userId;
