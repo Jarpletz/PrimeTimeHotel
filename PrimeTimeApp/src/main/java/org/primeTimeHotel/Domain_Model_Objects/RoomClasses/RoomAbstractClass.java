@@ -1,4 +1,4 @@
-package org.primeTimeHotel.Domain_Model_Objects;
+package org.primeTimeHotel.Domain_Model_Objects.RoomClasses;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -7,35 +7,33 @@ public class RoomAbstractClass {
     public enum RoomType{
         SINGLE, DOUBLE, FAMILY, SUITE,STANDARD, DELUXE
     }
-    public class Bed{
-        public enum BedType{SINGLE, DOUBLE, QUEEN};
-        private BedType type;
-        Bed(){}
-        Bed(BedType type){this.type = type;}
-        public void setType(BedType type){this.type = type;}
-        public BedType getType() {return type;}
 
-    }
     public enum QualityLevel {
         EXECUTIVE, BUSINESS, COMFORT, ECONOMY
     }
-    public RoomAbstractClass(int floor, int roomNumber, double currentRate, ArrayList<Bed> beds, boolean smokerStatus, QualityLevel qualityLevel){
-        this();
+
+    public RoomAbstractClass(int floor, int roomNumber, double currentRate,
+                             ArrayList<Bed> beds, boolean smokerStatus,
+                             QualityLevel qualityLevel, RoomType type){
         this.floor = floor;
         this.roomNumber = roomNumber;
         this.currentRate = currentRate;
         this.beds = beds;
         this.qualityLevel = qualityLevel;
         this.smokerStatus = smokerStatus;
+        this.type = type;
     }
 
     public RoomAbstractClass(){
+        id= -1;
         beds = new ArrayList<>();
         smokerStatus = false;
         type = RoomType.STANDARD;
     }
 
+
     private  int id;
+    private  int roomID;
     private int roomNumber;
     private QualityLevel qualityLevel;
 

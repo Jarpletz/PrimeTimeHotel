@@ -1,4 +1,4 @@
-package org.primeTimeHotel.Domain_Model_Objects;
+package org.primeTimeHotel.Domain_Model_Objects.RoomClasses;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -9,8 +9,10 @@ public class UrbanEleganceRoom extends RoomAbstractClass{
         super();
     }
 
-    public UrbanEleganceRoom(int floor, int roomNumber, double currentRate, ArrayList<Bed> beds, boolean smokerStatus, QualityLevel qualityLevel){
-        super(floor, roomNumber, currentRate, beds, smokerStatus, qualityLevel);
+    public UrbanEleganceRoom(int floor, int roomNumber, double currentRate,
+                             ArrayList<Bed> beds, boolean smokerStatus,
+                             QualityLevel qualityLevel, RoomType type){
+        super(floor, roomNumber, currentRate, beds,  smokerStatus, qualityLevel, type);
     }
     @Override
     public boolean equals(Object o) {

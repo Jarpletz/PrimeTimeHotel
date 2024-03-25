@@ -1,7 +1,10 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
+import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.NatureRetreatRoom;
+import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.UrbanEleganceRoom;
+import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.VintageCharmRoom;
+
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Floors {
     private ArrayList<NatureRetreatRoom> natureFloor;
