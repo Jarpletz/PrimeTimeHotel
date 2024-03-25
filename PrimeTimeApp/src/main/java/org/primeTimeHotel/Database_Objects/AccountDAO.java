@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDAO extends RootDAO<Account> {
-    AccountDAO() {
+    public AccountDAO() {
         super("accounts", new String[]{"username", "password", "first_name", "last_name", "phone_number", "email", "account_type"});
     }
     @Override
@@ -115,22 +115,7 @@ public class AccountDAO extends RootDAO<Account> {
     private List<Account> resultSetToAccountList(ResultSet rs) throws SQLException {
         List<Account> accounts= new ArrayList<>();
         while (rs.next()) {
-            Account.Type type = Account.Type.fromCode(rs.getInt("account_type"));
-            Account newAccount;
-            if(type == Account.Type.GUEST)
-                newAccount = new GuestAccount();
-            else if(type == Account.Type.CLERK)
-                newAccount = new ClerkAccount();
-            else
-                newAccount = new AdminAccount();
-            newAccount.setId(rs.getInt("id"));
-            newAccount.setUsername(rs.getString("username"));
-            newAccount.setPassword(rs.getString("password"));
-            newAccount.setFirstName(rs.getString("first_name"));
-            newAccount.setLastName(rs.getString("last_name"));
-            newAccount.setPhoneNumber(rs.getString("phone_number"));
-            newAccount.setEmail(rs.getString("email"));
-            accounts.add(newAccount);
+            accounts.add(initializeEntry(rs));
         }
         return accounts;
     }
