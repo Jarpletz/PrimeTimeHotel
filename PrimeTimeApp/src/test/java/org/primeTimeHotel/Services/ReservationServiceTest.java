@@ -21,21 +21,24 @@ public class ReservationServiceTest {
 
     @Test
     void createReservationTest() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = null;
         Date endDate = null;
-        try{
-            startDate = (Date) dateFormat.parse("2024-03-18 15:54:37");
-            endDate = (Date) dateFormat.parse("2024-03-19 15:54:37");
-
+        java.util.Date parsedStartDate;
+        java.util.Date parsedEndDate;
+        try {
+            parsedStartDate = dateFormat.parse("2024-03-18");
+            parsedEndDate = dateFormat.parse("2024-03-19");
         }catch(RuntimeException e){
             System.err.println("Error: ");
             e.printStackTrace();
             return;
         }
+        startDate = new Date(parsedStartDate.getTime());
+        endDate = new Date(parsedEndDate.getTime());
 
         List<RoomAbstractClass> avalibleRooms = reservationService.getAvalibleRooms(startDate, endDate, 1);
-        //fixmE to be fixed at a later date.
+        assertEquals(2, avalibleRooms.size(), "Expecting there to be no rooms.");
 
 
     }

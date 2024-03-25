@@ -17,6 +17,7 @@ public class ReservationService {
 
     public ReservationService(){
         reservationDAO = new ReservationDAO();
+        roomDAO = new RoomDAO();
     }
 
     //returns false if the reservation conflicts with an already existing reservation,
@@ -60,7 +61,11 @@ public class ReservationService {
         List<Integer> conflictingRoomIDs = conflictingRooms.stream().map(Reservation::getRoomId).toList();
 
         //get rooms that dont have those room ID's and match floor number
-        return roomDAO.getAvailable(conflictingRoomIDs, floor);
+        List<RoomAbstractClass> availableRooms = roomDAO.getAvailable(conflictingRoomIDs, floor);
+        if(availableRooms == null){
+            availableRooms = new ArrayList<>();
+        }
+        return availableRooms;
 
     }
 
