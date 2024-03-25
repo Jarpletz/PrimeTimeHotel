@@ -30,7 +30,7 @@ public class ReservationService {
     //saves a new reservation in the system. Returns true if successful
     public boolean saveNewReservation(Reservation r){
         if(this.checkReservationValid(r)){
-            return reservationDAO.insertReservation(r);
+            return reservationDAO.insert(r);
         }
         return false;
     }
@@ -40,7 +40,7 @@ public class ReservationService {
         if(r.getId()<1) return false;
 
         if(this.checkReservationValid(r)){
-            return reservationDAO.updateReservation(r);
+            return reservationDAO.update(r);
         }
         return false;
     }
@@ -71,7 +71,7 @@ public class ReservationService {
 
     public Reservation selectRoom(GuestAccount account, RoomAbstractClass roomToBeSelected, Date startDate, Date endDate){
         Reservation newReservation =  createReservation(startDate,endDate, roomToBeSelected.getId(),account.getId());
-        reservationDAO.insertReservation(newReservation);
+        reservationDAO.insert(newReservation);
         return newReservation;
     }
 

@@ -46,9 +46,9 @@ public abstract class Account extends AbstractDomainModelObject {
         this.email = email;
         id = -1;
     }
-    /*public  Account(){
+    public  Account(){
         this("","","","","","");
-    }*/
+    }
 
     // Getter and setter methods for username, password, firstName, lastName, phoneNumber, and email
 
