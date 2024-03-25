@@ -28,6 +28,5 @@ public class Main {
         //rooms.add(new NatureRetreatRoom(1,100,150.5,beds, false, RoomAbstractClass.QualityLevel.ECONOMY));
         dao.insert(natureRetreatRoom);
         MasterDAO.close();*/
-
     }
 }
