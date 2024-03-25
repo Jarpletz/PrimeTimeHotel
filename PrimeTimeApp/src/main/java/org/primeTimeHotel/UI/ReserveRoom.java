@@ -300,10 +300,10 @@ public class ReserveRoom {
 
         //FAKE BUTTONS
         addReservationToList("Room 305,Beds: 3,$215 per night,2 Queen 1 Pullout,Non-smoking");
-        addReservationToList("Room 306,Beds: 2,$200 per night,1 King 1 Pullout,Non-smoking\"");
-        addReservationToList("Room 307,Beds: 2,$205 per night,1 Queen 1 Pullout,Non-smoking\"");
-        addReservationToList("Room 308,Beds: 3,$215 per night,2 Queen 1 Pullout,Non-smoking\"");
-        addReservationToList("Room 309,Beds: 3,$215 per night,2 Queen 1 Pullout,Non-smoking\"");
+        addReservationToList("Room 306,Beds: 2,$200 per night,1 King 1 Pullout,Non-smoking");
+        addReservationToList("Room 307,Beds: 2,$205 per night,1 Queen 1 Pullout,Non-smoking");
+        addReservationToList("Room 308,Beds: 3,$215 per night,2 Queen 1 Pullout,Non-smoking");
+        addReservationToList("Room 309,Beds: 3,$215 per night,2 Queen 1 Pullout,Non-smoking");
 
 
         //Compile into frame
