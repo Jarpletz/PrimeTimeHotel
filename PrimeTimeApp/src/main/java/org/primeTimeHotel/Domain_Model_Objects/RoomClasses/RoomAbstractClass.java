@@ -1,4 +1,4 @@
-package org.primeTimeHotel.Domain_Model_Objects;
+package org.primeTimeHotel.Domain_Model_Objects.RoomClasses;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -7,15 +7,7 @@ public class RoomAbstractClass {
     public enum RoomType{
         SINGLE, DOUBLE, FAMILY, SUITE,STANDARD, DELUXE
     }
-    public class Bed{
-        public enum BedType{SINGLE, DOUBLE, QUEEN};
-        private BedType type;
-        Bed(){}
-        Bed(BedType type){this.type = type;}
-        public void setType(BedType type){this.type = type;}
-        public BedType getType() {return type;}
 
-    }
     public enum QualityLevel {
         EXECUTIVE, BUSINESS, COMFORT, ECONOMY
     }
