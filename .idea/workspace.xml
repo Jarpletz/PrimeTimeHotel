@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87289fb2-c93f-4042-b062-a915770a1af3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/Account.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/AdminAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/ClerkAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/GuestAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ExampleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ExampleDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/MasterDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/MasterDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/Floors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="87289fb2-c93f-4042-b062-a915770a1af3" name="Changes" comment="Changed Reservation and ReservationStatus">
+      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/RoomDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/RoomDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,14 +66,16 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
-    "git-widget-placeholder": "addedExampleDatabaseConnection",
-    "git-widget-placeholder": "AddingFloorAndBed",
+    "git-widget-placeholder": "AddRoom__Case",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "project.propGUI",
     "vue.rearranger.settings.migration": "true"
   },
@@ -95,10 +86,15 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.primeTimeHotel.Domain_Model_Objects" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-f644763e9732-c0c073db" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-23eed401" />
       </set>
     </attachedChunks>
   </component>
@@ -116,6 +112,7 @@
       <workItem from="1711143315320" duration="698000" />
       <workItem from="1711169394250" duration="156000" />
       <workItem from="1711169586667" duration="16182000" />
+      <workItem from="1711311544363" duration="426000" />
     </task>
     <task id="LOCAL-00001" summary="Adding Payment Information class to be used for later">
       <option name="closed" value="true" />
@@ -179,7 +176,9 @@
     <MESSAGE value="Created a database and added and example on how to connect :)" />
     <MESSAGE value="Did not need the top statement" />
     <MESSAGE value="Added a MasterDAO object to be inherited by all DAO's" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a MasterDAO object to be inherited by all DAO's" />
+    <MESSAGE value="Changed Reservation and ReservationStatus" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed Reservation and ReservationStatus" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>

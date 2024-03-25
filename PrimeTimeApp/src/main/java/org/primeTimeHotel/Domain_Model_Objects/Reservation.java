@@ -1,22 +1,60 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
-import java.sql.*;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class Reservation {
+    public enum Status {
+        CHECKED_IN(0),
+        CHECKED_OUT(1),
+        SCHEDULED(2),
+        CANCELED(3);
+
+        private final int code;
+
+        Status(int code) {
+            this.code = code;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public static Reservation.Status fromCode(int code) {
+            for (Reservation.Status type: Reservation.Status.values()) {
+                if (type.getCode() == code) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("Invalid code: " + code);
+        }
+    }
     private int id;
     private int userId;
     private int roomId;
     private Date startDate;
     private Date endDate;
 
-    private ReservationStatus status;
+    private Status status;
 
     public Reservation(){
-        this(-1, -1, null, null);
+        id = -1;
+        userId = -1;
+        roomId = -1;
+        startDate = null;
+        endDate = null;
+        status = Status.SCHEDULED;
     }
 
-
+    public Reservation(int userId, int roomId,Date startDate,Date endDate){
+        setUserId(userId);
+        setRoomId(roomId);
+        setStartDate(startDate);
+        setEndDate(endDate);
+        status = Status.SCHEDULED;
+    }
     public Reservation(ResultSet resultSet) throws SQLException {
         this(
                 resultSet.getInt("user_id"),
@@ -25,16 +63,7 @@ public class Reservation {
                 resultSet.getDate("end_date")
         );
         this.id = resultSet.getInt("id");
-        this.status = ReservationStatus.fromCode(resultSet.getInt("status"));
-    }
-
-    public Reservation(int userId, int roomId, Date startDate, Date endDate){
-        this.id = -1;
-        this.userId = userId;
-        this.roomId = roomId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = ReservationStatus.SCHEDULED;
+        this.status = Status.fromCode(resultSet.getInt("status"));
     }
 
     public int getId() {
@@ -52,7 +81,7 @@ public class Reservation {
     public Date getEndDate() {
         return endDate;
     }
-    public ReservationStatus getStatus(){return status;}
+    public Status getStatus(){return status;}
 
     public void setId(int id) {
         this.id = id;
@@ -70,7 +99,7 @@ public class Reservation {
         this.endDate = endDate;
     }
 
-    public void setStatus(ReservationStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

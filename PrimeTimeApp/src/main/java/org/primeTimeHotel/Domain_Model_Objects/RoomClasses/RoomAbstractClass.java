@@ -1,22 +1,39 @@
-package org.primeTimeHotel.Domain_Model_Objects;
+package org.primeTimeHotel.Domain_Model_Objects.RoomClasses;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public abstract class RoomAbstractClass {
-
-    public static class Bed{
-        public enum BedType{SINGLE, DOUBLE, QUEEN};
-        private BedType type;
-        Bed(){}
-        public void setType(BedType type){this.type = type;}
-        public BedType getType() {return type;}
-
+public class RoomAbstractClass {
+    public enum RoomType{
+        SINGLE, DOUBLE, FAMILY, SUITE,STANDARD, DELUXE
     }
+
     public enum QualityLevel {
         EXECUTIVE, BUSINESS, COMFORT, ECONOMY
     }
 
+    public RoomAbstractClass(int floor, int roomNumber, double currentRate,
+                             ArrayList<Bed> beds, boolean smokerStatus,
+                             QualityLevel qualityLevel, RoomType type){
+        this.floor = floor;
+        this.roomNumber = roomNumber;
+        this.currentRate = currentRate;
+        this.beds = beds;
+        this.qualityLevel = qualityLevel;
+        this.smokerStatus = smokerStatus;
+        this.type = type;
+    }
+
+    public RoomAbstractClass(){
+        id= -1;
+        beds = new ArrayList<>();
+        smokerStatus = false;
+        type = RoomType.STANDARD;
+    }
+
+
+    private  int id;
+    private  int roomID;
     private int roomNumber;
     private QualityLevel qualityLevel;
 
@@ -24,11 +41,28 @@ public abstract class RoomAbstractClass {
     private int floor;
     private double currentRate;
     private boolean smokerStatus;
+    private RoomType type;
 
     //Also to be changed by logan --CHANGED!
     private ArrayList<Bed> beds;
 
     ///Accessors and Mutators
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setQualityLevel(QualityLevel qualityLevel) {
+        this.qualityLevel = qualityLevel;
+    }
+
+    public QualityLevel getQualityLevel() {
+        return qualityLevel;
+    }
+
     public ArrayList<Bed> getBeds() {
         return beds;
     }
@@ -68,6 +102,14 @@ public abstract class RoomAbstractClass {
         this.smokerStatus = smokerStatus;
     }
 
+    public RoomType getType() {
+        return type;
+    }
+
+    public void setType(RoomType type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,7 +121,6 @@ public abstract class RoomAbstractClass {
     public int hashCode() {
         return Objects.hash(getRoomNumber(), qualityLevel, getFloor(), getCurrentRate(), isSmokerStatus(), getBeds());
     }
-
 
 
 }

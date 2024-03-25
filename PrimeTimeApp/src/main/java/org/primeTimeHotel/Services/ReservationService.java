@@ -1,7 +1,10 @@
 package org.primeTimeHotel.Services;
 
 import org.primeTimeHotel.Database_Objects.ReservationDAO;
+import org.primeTimeHotel.Database_Objects.RoomDAO;
+import org.primeTimeHotel.Domain_Model_Objects.GuestAccount;
 import org.primeTimeHotel.Domain_Model_Objects.Reservation;
+import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.RoomAbstractClass;
 
 import java.util.ArrayList;
 import java.sql.Date;
@@ -10,6 +13,7 @@ import java.util.List;
 public class ReservationService {
 
     ReservationDAO reservationDAO;
+    RoomDAO roomDAO;
 
     public ReservationService(){
         reservationDAO = new ReservationDAO();
@@ -49,4 +53,21 @@ public class ReservationService {
         //TODO: get a list of all user IDs here whose accountInfo matches what was searched
         return reservationDAO.fetchByUserList(userIds);
     }
+
+    public List<RoomAbstractClass> getAvalibleRooms(Date startDate, Date endDate, int floor){
+        //Fetch conflicting rooms first
+        List<Reservation> conflictingRooms = reservationDAO.fetchByOverlappingDates(startDate,endDate);
+        List<Integer> conflictingRoomIDs = conflictingRooms.stream().map(Reservation::getRoomId).toList();
+
+        //get rooms that dont have those room ID's and match floor number
+        return roomDAO.getAvailable(conflictingRoomIDs, floor);
+
+    }
+
+    public Reservation selectRoom(GuestAccount account, RoomAbstractClass roomToBeSelected, Date startDate, Date endDate){
+        Reservation newReservation =  createReservation(startDate,endDate, roomToBeSelected.getId(),account.getId());
+        reservationDAO.insertReservation(newReservation);
+        return newReservation;
+    }
+
 }
