@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationDAO extends MasterDAO<Reservation> {
+public class ReservationDAO extends RootDAO<Reservation> {
     ReservationDAO() {
         super("reservations", new String[] {"user_id", "room_id", "start_date", "end_date", "status"});
     }

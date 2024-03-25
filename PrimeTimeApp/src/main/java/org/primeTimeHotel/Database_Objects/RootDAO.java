@@ -4,12 +4,12 @@ import org.primeTimeHotel.Domain_Model_Objects.AbstractDomainModelObject;
 
 import java.sql.*;
 
-public abstract class MasterDAO<T extends AbstractDomainModelObject> {
+public abstract class RootDAO<T extends AbstractDomainModelObject> {
     static protected Connection connection = null;
     protected String table_name;
     protected String[] attribute_names;
 
-    MasterDAO(String table_name, String[] attribute_names) {
+    RootDAO(String table_name, String[] attribute_names) {
         this.table_name = table_name;
         this.attribute_names = attribute_names;
         if (connection == null) {

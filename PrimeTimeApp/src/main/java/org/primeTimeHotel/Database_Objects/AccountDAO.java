@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountDAO extends  MasterDAO{
+public class AccountDAO extends RootDAO {
 
 
     public Account fetchAccount(int account_id){
