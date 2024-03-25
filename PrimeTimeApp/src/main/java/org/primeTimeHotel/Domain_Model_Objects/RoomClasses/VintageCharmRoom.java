@@ -8,8 +8,10 @@ public class VintageCharmRoom extends RoomAbstractClass {
         super();
     }
 
-    public VintageCharmRoom(int floor, int roomNumber, double currentRate, ArrayList<Bed> beds, boolean smokerStatus, QualityLevel qualityLevel){
-        super(floor, roomNumber, currentRate, beds, smokerStatus, qualityLevel);
+    public VintageCharmRoom(int floor, int roomNumber, double currentRate,
+                            ArrayList<Bed> beds, boolean smokerStatus,
+                            QualityLevel qualityLevel, RoomType type){
+        super(floor, roomNumber, currentRate, beds,  smokerStatus, qualityLevel, type);
     }
     @Override
     public boolean equals(Object o) {

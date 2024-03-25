@@ -11,23 +11,29 @@ public class RoomAbstractClass {
     public enum QualityLevel {
         EXECUTIVE, BUSINESS, COMFORT, ECONOMY
     }
-    public RoomAbstractClass(int floor, int roomNumber, double currentRate, ArrayList<Bed> beds, boolean smokerStatus, QualityLevel qualityLevel){
-        roomID++;
+    public RoomAbstractClass(int floor, int roomNumber, double currentRate,
+                             ArrayList<Bed> beds, boolean smokerStatus,
+                             QualityLevel qualityLevel, RoomType type){
+        roomCount++;
+        roomID = roomCount;
         this.floor = floor;
         this.roomNumber = roomNumber;
         this.currentRate = currentRate;
         this.beds = beds;
         this.qualityLevel = qualityLevel;
         this.smokerStatus = smokerStatus;
+        this.type = type;
     }
 
     public RoomAbstractClass(){
-        roomID++;
+        roomCount++;
+        roomID = roomCount;
         beds = new ArrayList<>();
         smokerStatus = false;
     }
 
-    private static int roomID = 0;
+    private  int roomID;
+    private static int roomCount = 0;
     private int roomNumber;
     private QualityLevel qualityLevel;
 
