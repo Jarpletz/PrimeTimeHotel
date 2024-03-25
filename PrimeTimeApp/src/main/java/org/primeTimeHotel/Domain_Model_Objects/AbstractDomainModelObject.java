@@ -9,4 +9,5 @@ public abstract class AbstractDomainModelObject {
     public void setId(int id) {this.id = id;}
 
     public abstract void setStatement(PreparedStatement statement, int parameterIndex) throws SQLException;
+    public void setStatement(PreparedStatement statement) throws SQLException { setStatement(statement, 1); }
 }
