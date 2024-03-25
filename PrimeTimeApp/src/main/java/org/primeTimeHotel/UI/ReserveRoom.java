@@ -1,5 +1,6 @@
 package org.primeTimeHotel.UI;
 
+import com.raven.datechooser.DateChooser;
 import org.w3c.dom.css.Rect;
 
 import javax.imageio.ImageIO;
@@ -16,6 +17,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.Flow;
+
+import com.raven.datechooser.EventDateChooser;
+import com.raven.datechooser.SelectedAction;
+import com.raven.datechooser.SelectedDate;
+
 
 public class ReserveRoom {
     private static int NUM_RESERVATIONS = 5;
@@ -39,8 +45,35 @@ public class ReserveRoom {
     private JTextField roomTextField;
     private BufferedImage companyLogo;
 
+
+    // Peter Code
+    private javax.swing.JButton jButton5;
+    private DateChooser dateChooser;
+
+
     public ReserveRoom() {
-        this.createUIComponents();
+        //this.createUIComponents();
+        this.dateTest();
+    }
+
+
+
+
+    private void dateTest()
+    {
+        dateChooser = new DateChooser();
+
+        jButton5.setText("test");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+    }
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        dateChooser.showPopup();
     }
 
 

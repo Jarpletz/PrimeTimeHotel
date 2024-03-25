@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87289fb2-c93f-4042-b062-a915770a1af3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/Account.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/AdminAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/ClerkAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/GuestAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ExampleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/ExampleDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/MasterDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Database_Objects/MasterDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/Domain_Model_Objects/Floors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/UI/ReserveRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/PrimeTimeApp/src/main/java/org/primeTimeHotel/UI/ReserveRoom.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +49,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -72,19 +66,23 @@
   "keyToString": {
     "Application.ExampleDatabaseConnection.executor": "Run",
     "Application.ReservationDAO.executor": "Run",
+    "Application.UIPackage.executor": "Run",
     "Maven.PrimeTimeApp [install].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
-    "git-widget-placeholder": "addedExampleDatabaseConnection",
-    "git-widget-placeholder": "AddingFloorAndBed",
+    "git-widget-placeholder": "DateTest",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/modules/baylor/spring24/SoftwareEngineringOne/Project/Project/PrimeTimeHotel/PrimeTimeApp/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "project.propGUI",
     "vue.rearranger.settings.migration": "true"
   },
@@ -95,10 +93,36 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\modules\baylor\spring24\SoftwareEngineringOne\Project\Project\PrimeTimeHotel\PrimeTimeApp\src" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="UIPackage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.primeTimeHotel.UI.UIPackage" />
+      <module name="PrimeTimeApp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.primeTimeHotel.UI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.UIPackage" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
         <option value="jdk-21.0.2-openjdk-21.0.2-f644763e9732-c0c073db" />
+        <option value="jdk-22-openjdk-22-f644763e9732-8c5c9ae5" />
       </set>
     </attachedChunks>
   </component>
@@ -174,12 +198,6 @@
       </map>
     </option>
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adding Payment Information class to be used for later" />
-    <MESSAGE value="Created a database and added and example on how to connect :)" />
-    <MESSAGE value="Did not need the top statement" />
-    <MESSAGE value="Added a MasterDAO object to be inherited by all DAO's" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a MasterDAO object to be inherited by all DAO's" />
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -190,5 +208,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
