@@ -20,7 +20,7 @@ public class RoomAbstractClass {
         EXECUTIVE, BUSINESS, COMFORT, ECONOMY
     }
     public RoomAbstractClass(int floor, int roomNumber, double currentRate, ArrayList<Bed> beds, boolean smokerStatus, QualityLevel qualityLevel){
-        roomID++;
+        this();
         this.floor = floor;
         this.roomNumber = roomNumber;
         this.currentRate = currentRate;
@@ -30,12 +30,12 @@ public class RoomAbstractClass {
     }
 
     public RoomAbstractClass(){
-        roomID++;
         beds = new ArrayList<>();
         smokerStatus = false;
+        type = RoomType.STANDARD;
     }
 
-    private static int roomID = 0;
+    private  int id;
     private int roomNumber;
     private QualityLevel qualityLevel;
 
@@ -50,11 +50,11 @@ public class RoomAbstractClass {
 
     ///Accessors and Mutators
     public void setId(int id) {
-        this.roomID = id;
+        this.id = id;
     }
 
     public int getId() {
-        return roomID;
+        return id;
     }
 
     public void setQualityLevel(QualityLevel qualityLevel) {

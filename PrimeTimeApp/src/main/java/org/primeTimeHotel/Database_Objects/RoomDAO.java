@@ -64,8 +64,9 @@ public class RoomDAO extends MasterDAO{
         if(connection == null) return null;
         try {
             PreparedStatement statement =connection.prepareStatement("SELECT * FROM rooms WHERE id = ?");
+            statement.setInt(1,roomID);
             List<RoomAbstractClass> rooms =fetchRooms(statement);
-            return rooms.isEmpty()? null : rooms.getFirst();
+            return rooms == null || rooms.isEmpty()? null : rooms.getFirst();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -87,7 +88,7 @@ public class RoomDAO extends MasterDAO{
             PreparedStatement statement =connection.prepareStatement("SELECT * FROM rooms WHERE ROOM_NUMBER = ? FETCH FIRST ROW ONLY");
             statement.setInt(1,roomNumber);
             List<RoomAbstractClass> rooms =fetchRooms(statement);
-            return rooms.isEmpty()? null : rooms.getFirst();
+            return rooms == null || rooms.isEmpty()? null : rooms.getFirst();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

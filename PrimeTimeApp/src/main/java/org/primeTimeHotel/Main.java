@@ -11,10 +11,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        RoomDAO dao = new RoomDAO();
-
-
-
+        AccountDAO dao = new AccountDAO();
+        Account acc = new GuestAccount("speedyJJ","Fr3kyFa5t","Jimmy","John","(264)264-9264","Jimmy@JimmyJohns.com");
+        System.out.println(
+                dao.insert(acc)
+        );
 
         MasterDAO.close();
     }

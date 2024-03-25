@@ -16,7 +16,7 @@ public class AccountDAO extends  MasterDAO{
             PreparedStatement statement =connection.prepareStatement("SELECT * FROM ACCOUNTS WHERE ID = ? FETCH FIRST ROW ONLY");
             statement.setInt(1,account_id);
             List<Account> accounts= fetchAccounts(statement);
-            if(!accounts.isEmpty()) return accounts.getFirst();
+            if(accounts!= null && !accounts.isEmpty()) return accounts.getFirst();
         } catch (SQLException e) {
             e.printStackTrace();
 
@@ -30,7 +30,7 @@ public class AccountDAO extends  MasterDAO{
             statement.setString(1,username);
             statement.setString(2,password);
             List<Account> accounts= fetchAccounts(statement);
-            if(!accounts.isEmpty()) return accounts.getFirst();
+            if(accounts!=null && !accounts.isEmpty()) return accounts.getFirst();
         } catch (SQLException e) {
             e.printStackTrace();
 
