@@ -60,17 +60,6 @@ public class Reservation extends AbstractDomainModelObject {
         this.status = Status.fromCode(resultSet.getInt("status"));
     }
 
-    @Override
-    public void setStatement(PreparedStatement statement, int parameterIndex) throws SQLException {
-        statement.setInt(parameterIndex++, getUserId());
-        statement.setInt(parameterIndex++, getRoomId());
-        statement.setDate(parameterIndex++, getStartDate());
-        statement.setDate(parameterIndex++, getEndDate());
-        statement.setInt(parameterIndex++, getStatus().getCode());
-        if (id != -1)
-            statement.setInt(parameterIndex, getId());
-    }
-
     public int getUserId() {
         return userId;
     }

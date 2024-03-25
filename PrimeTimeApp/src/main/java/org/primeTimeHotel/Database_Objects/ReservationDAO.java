@@ -12,6 +12,7 @@ public class ReservationDAO extends MasterDAO<Reservation> {
         super("reservations", new String[] {"user_id", "room_id", "start_date", "end_date", "status"});
     }
 
+    @Override
     public Reservation fetch(int id) {
         try {
             ResultSet rs = super.fetchResultSet(id);
@@ -21,6 +22,16 @@ public class ReservationDAO extends MasterDAO<Reservation> {
             e.printStackTrace();
         }
         return null;
+    }
+    @Override
+    public void setStatement(PreparedStatement statement, Reservation r, int parameterIndex) throws SQLException {
+        statement.setInt(parameterIndex++, r.getUserId());
+        statement.setInt(parameterIndex++, r.getRoomId());
+        statement.setDate(parameterIndex++, r.getStartDate());
+        statement.setDate(parameterIndex++, r.getEndDate());
+        statement.setInt(parameterIndex++, r.getStatus().getCode());
+        if (r.getId() != -1)
+            statement.setInt(parameterIndex, r.getId());
     }
 
     public List<Reservation> fetchAll(){

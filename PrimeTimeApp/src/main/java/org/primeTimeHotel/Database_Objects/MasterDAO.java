@@ -63,7 +63,7 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
             String[] returnColumns = {"id"};
             try (PreparedStatement statement = connection.prepareStatement(sql, returnColumns)) {
                 t.setId(-1); // should already be, but just incase
-                t.setStatement(statement);
+                setStatement(statement, t);
                 if (statement.executeUpdate() > 0) {
                     try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                         if (generatedKeys.next()) {
@@ -89,7 +89,7 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
                 "SET " + String.join(", ", items) + " " +
                 "WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                t.setStatement(statement);
+                setStatement(statement, t);
                 return statement.executeUpdate() > 0;
             } catch (SQLException e){
                 e.printStackTrace();
@@ -109,4 +109,7 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
         }
         return false;
     }
+
+    protected abstract void setStatement(PreparedStatement statement, T t, int parameterIndex) throws SQLException;
+    protected void setStatement(PreparedStatement statement, T t) throws SQLException { setStatement(statement, t, 1); }
 }
