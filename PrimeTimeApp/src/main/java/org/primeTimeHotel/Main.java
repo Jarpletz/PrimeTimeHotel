@@ -8,6 +8,7 @@ import org.primeTimeHotel.Domain_Model_Objects.*;
 import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.Bed;
 import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.NatureRetreatRoom;
 import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.RoomAbstractClass;
+import org.primeTimeHotel.Services.ReservationService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +17,8 @@ public class Main {
     public static void main(String[] args) {
         RoomDAO dao = new RoomDAO();
 
-        ArrayList<Bed> beds = new ArrayList<>();
-        beds.add(new Bed(Bed.BedType.SINGLE));
-        beds.add(new Bed(Bed.BedType.DOUBLE));
-        //beds.add(new Bed(Bed.BedType.QUEEN));
 
-        NatureRetreatRoom natureRetreatRoom =
-                new NatureRetreatRoom(1,103, 115.15, beds,
-                        true, RoomAbstractClass.QualityLevel.BUSINESS,
-                        RoomAbstractClass.RoomType.DOUBLE);
 
-        dao.insert(natureRetreatRoom);
 
 
 
