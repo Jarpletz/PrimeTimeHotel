@@ -13,7 +13,13 @@ public class Main {
     public static void main(String[] args) {
         RoomDAO dao = new RoomDAO();
 
+      /*  List<RoomAbstractClass> rooms = new ArrayList<>();
+        ArrayList<RoomAbstractClass.Bed> beds = new ArrayList<>();
 
+        rooms.add(new NatureRetreatRoom(1,100,150.5,beds, false, RoomAbstractClass.QualityLevel.ECONOMY));
+        dao.insert(new NatureRetreatRoom(1,100,150.5,beds, false, RoomAbstractClass.QualityLevel.ECONOMY));
+
+        */
 
 
         MasterDAO.close();
