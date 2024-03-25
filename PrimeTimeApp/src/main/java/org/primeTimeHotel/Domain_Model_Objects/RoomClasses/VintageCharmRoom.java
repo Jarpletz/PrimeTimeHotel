@@ -1,4 +1,4 @@
-package org.primeTimeHotel.Domain_Model_Objects;
+package org.primeTimeHotel.Domain_Model_Objects.RoomClasses;
 
 import java.util.ArrayList;
 import java.util.Objects;

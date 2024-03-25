@@ -1,16 +1,12 @@
 package org.primeTimeHotel.Database_Objects;
 
-import org.primeTimeHotel.Domain_Model_Objects.NatureRetreatRoom;
-import org.primeTimeHotel.Domain_Model_Objects.RoomAbstractClass;
-import org.primeTimeHotel.Domain_Model_Objects.UrbanEleganceRoom;
-import org.primeTimeHotel.Domain_Model_Objects.VintageCharmRoom;
+import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RoomDAO extends MasterDAO{
     private List<RoomAbstractClass> tempRooms;
@@ -176,7 +172,7 @@ public class RoomDAO extends MasterDAO{
             else room = new UrbanEleganceRoom();
             room.setId(rs.getInt("id"));
             room.setRoomNumber(rs.getInt("room_number"));
-            room.setBeds(rs.getObject("room_beds", RoomAbstractClass.Bed.class));
+            room.setBeds(rs.getObject("room_beds", Bed.class));
             room.setFloor(rs.getInt("floor_number"));
             room.setCurrentRate(rs.getDouble("current_rate"));
             room.setSmokerStatus(rs.getBoolean("smoker_status"));
