@@ -7,8 +7,10 @@ public class NatureRetreatRoom extends RoomAbstractClass {
     public NatureRetreatRoom(){
         super();
     }
-    public NatureRetreatRoom(int floor, int roomNumber, double currentRate, ArrayList<Bed> beds, boolean smokerStatus, QualityLevel qualityLevel){
-        super(floor, roomNumber, currentRate, beds, smokerStatus, qualityLevel);
+    public NatureRetreatRoom(int floor, int roomNumber, double currentRate,
+                             ArrayList<Bed> beds, boolean smokerStatus,
+                             QualityLevel qualityLevel, RoomType type){
+        super(floor, roomNumber, currentRate, beds,  smokerStatus, qualityLevel, type);
     }
 
     @Override
