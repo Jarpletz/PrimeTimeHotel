@@ -61,6 +61,7 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
                 "VALUES (" + String.join(", ", java.util.Collections.nCopies(names.length, "?"))+ ")";
             String[] returnColumns = {"id"};
             try (PreparedStatement statement = connection.prepareStatement(sql, returnColumns)) {
+                t.setId(-1); // should already be, but just incase
                 t.setStatement(statement,1);
                 if (statement.executeUpdate() > 0) {
                     try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
