@@ -1,9 +1,11 @@
 package org.primeTimeHotel.Domain_Model_Objects.RoomClasses;
 
+import org.primeTimeHotel.Domain_Model_Objects.AbstractDomainModelObject;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class RoomAbstractClass {
+public class RoomAbstractClass extends AbstractDomainModelObject {
     public enum RoomType{
         SINGLE, DOUBLE, FAMILY, SUITE,STANDARD, DELUXE
     }

@@ -2,7 +2,7 @@ package org.primeTimeHotel.Domain_Model_Objects;
 
 import java.util.Objects;
 
-public abstract class Account {
+public abstract class Account extends AbstractDomainModelObject {
     public enum Type {
         GUEST(0),
         CLERK(1),
@@ -28,7 +28,6 @@ public abstract class Account {
         }
     }
 
-    private int id;
     private String username;
     private String password;
     private String firstName;
@@ -47,21 +46,13 @@ public abstract class Account {
         this.email = email;
         id = -1;
     }
-    public  Account(){
+    /*public  Account(){
         this("","","","","","");
-    }
+    }*/
 
     // Getter and setter methods for username, password, firstName, lastName, phoneNumber, and email
 
     // Getter and setter for username
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

@@ -6,67 +6,51 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class RoomDAO extends RootDAO {
-    private List<RoomAbstractClass> tempRooms;
-
-    public RoomDAO(){super();}
-
-    public boolean insert(RoomAbstractClass room){
-        if(getRoom(room.getId())==null){
-            try{
-                PreparedStatement stmt = connection.prepareStatement(
-                        "INSERT INTO ROOMS(ROOM_NUMBER, QUALITY_LEVEL, ROOM_TYPE, FLOOR, RATE, SMOKING_STATUS)" +  " VALUES (?,?,?,?,?,?)");
-                stmt.setInt(1,room.getRoomNumber());
-                stmt.setInt(2, room.getQualityLevel().ordinal());
-                stmt.setInt(3,room.getType().ordinal());
-                stmt.setInt(4,room.getFloor());
-                stmt.setDouble(5,room.getCurrentRate());
-                stmt.setBoolean(6,room.isSmokerStatus());
-                stmt.executeUpdate();
-                return true;
-            }
-            catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
-        return false;
+public class RoomDAO extends RootDAO<RoomAbstractClass> {
+    public RoomDAO() {
+        super("rooms", new String[] {"room_number", "quality_level", "room_type", "floor", "rate", "smoking_status"});
     }
-
-    public boolean update(RoomAbstractClass room){
-        if(getRoom(room.getId())==null){
-            try{
-                PreparedStatement stmt = connection.prepareStatement(
-                        "UPDATE ROOMS SET ROOM_NUMBER=?, QUALITY_LEVEL=?, ROOM_TYPE=?, FLOOR=?, RATE=?, SMOKING_STATUS=? WHERE ID = ?");
-                stmt.setInt(1,room.getRoomNumber());
-                stmt.setInt(2, room.getQualityLevel().ordinal());
-                stmt.setInt(3,room.getType().ordinal());
-                stmt.setInt(4,room.getFloor());
-                stmt.setDouble(5,room.getCurrentRate());
-                stmt.setBoolean(6,room.isSmokerStatus());
-                stmt.setInt(7,room.getId());
-                stmt.executeUpdate();
-                return true;
-            }
-            catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
-        return false;
+    @Override
+    protected void setStatement(PreparedStatement statement, RoomAbstractClass room, int parameterIndex) throws SQLException {
+        statement.setInt(parameterIndex++, room.getRoomNumber());
+        statement.setInt(parameterIndex++, room.getQualityLevel().ordinal());
+        statement.setInt(parameterIndex++, room.getType().ordinal());
+        statement.setInt(parameterIndex++, room.getFloor());
+        statement.setDouble(parameterIndex++, room.getCurrentRate());
+        statement.setBoolean(parameterIndex++, room.isSmokerStatus());
+        if (room.getId() != -1)
+            statement.setInt(parameterIndex, room.getId());
     }
+    @Override
+    protected RoomAbstractClass initializeEntry(ResultSet resultSet) throws SQLException {
+        int floor = resultSet.getInt("floor");
+        RoomAbstractClass room = switch(floor) {
+            case 1 -> new NatureRetreatRoom();
+            case 2 -> new VintageCharmRoom();
+            case 3 -> new UrbanEleganceRoom();
+            default -> throw new IllegalStateException("Unexpected value: " + floor);
+        };
 
-    public RoomAbstractClass getRoom(int roomID){
-        if(connection == null) return null;
-        try {
-            PreparedStatement statement =connection.prepareStatement("SELECT * FROM rooms WHERE id = ?");
-            statement.setInt(1,roomID);
-            List<RoomAbstractClass> rooms =fetchRooms(statement);
-            return rooms == null || rooms.isEmpty()? null : rooms.getFirst();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        room.setId(resultSet.getInt("id"));
+        room.setFloor(floor);
+        room.setRoomNumber(resultSet.getInt("room_number"));
+        room.setCurrentRate(resultSet.getDouble("rate"));
+        room.setSmokerStatus(resultSet.getBoolean("smoking_status"));
+
+        // Create an array of Bed objects based on the values from the database
+        ArrayList<Bed> beds = new ArrayList<>();
+        int num = resultSet.getInt("num_single_beds");
+        beds.addAll(java.util.Collections.nCopies(num, new Bed(Bed.BedType.SINGLE)));
+        num = resultSet.getInt("num_double_beds");
+        beds.addAll(java.util.Collections.nCopies(num, new Bed(Bed.BedType.DOUBLE)));
+        num = resultSet.getInt("num_queen_beds");
+        beds.addAll(java.util.Collections.nCopies(num, new Bed(Bed.BedType.QUEEN)));
+        room.setBeds(beds);
+
+        return room;
     }
 
     public List<RoomAbstractClass> getAllRooms(){
@@ -93,7 +77,7 @@ public class RoomDAO extends RootDAO {
 
     public List<RoomAbstractClass> getByRoomNumberList(List<Integer> roomNumbers){
         try {
-            String placeholders = String.join(",", java.util.Collections.nCopies(roomNumbers.size(), "?"));
+            String placeholders = String.join(",", Collections.nCopies(roomNumbers.size(), "?"));
             PreparedStatement statement =connection.prepareStatement("SELECT * FROM rooms WHERE ROOM_NUMBER IN("+ placeholders+")");
             for (int i = 0; i < roomNumbers.size(); i++)
                 statement.setInt(i + 1, roomNumbers.get(i));
@@ -139,7 +123,7 @@ public class RoomDAO extends RootDAO {
 
     public List<RoomAbstractClass> getAvailable(List<Integer> notAvailable, int floorNumber){
         try {
-            String placeholders = String.join(",", java.util.Collections.nCopies(notAvailable.size(), "?"));
+            String placeholders = String.join(",", Collections.nCopies(notAvailable.size(), "?"));
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rooms WHERE FLOOR = ? AND ID NOT IN (" + placeholders + ")");
             statement.setInt(1, floorNumber);
 
@@ -154,15 +138,6 @@ public class RoomDAO extends RootDAO {
             return null;
         }
     }
-
-
-
-
-
-
-
-
-
 
     private List<RoomAbstractClass> fetchRooms(PreparedStatement statement){
         if(connection != null) {
