@@ -33,7 +33,7 @@ public class RoomAbstractClass {
 
 
     private  int id;
-    private  int roomID;
+
     private int roomNumber;
     private QualityLevel qualityLevel;
 
@@ -70,6 +70,10 @@ public class RoomAbstractClass {
     public void setBeds(Bed newBeds) {
         beds.add(newBeds);
     }
+    public void setBeds(ArrayList<Bed> newBeds) {
+        beds = newBeds;
+    }
+
     public int getRoomNumber() {
         return roomNumber;
     }

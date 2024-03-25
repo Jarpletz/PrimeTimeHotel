@@ -140,10 +140,13 @@ public class RoomDAO extends MasterDAO{
     public List<RoomAbstractClass> getAvailable(List<Integer> notAvailable, int floorNumber){
         try {
             String placeholders = String.join(",", java.util.Collections.nCopies(notAvailable.size(), "?"));
-            PreparedStatement statement =connection.prepareStatement("SELECT * FROM rooms WHERE FLOOR = ? AND ROOM_NUMBER NOT IN("+ placeholders+")");
-            statement.setInt(1,floorNumber);
-            for (int i = 0; i < notAvailable.size(); i++)
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM rooms WHERE FLOOR = ? AND ID NOT IN (" + placeholders + ")");
+            statement.setInt(1, floorNumber);
+
+
+            for (int i = 0; i < notAvailable.size(); i++) {
                 statement.setInt(i + 2, notAvailable.get(i));
+            }
 
             return fetchRooms(statement);
         } catch (SQLException e) {
@@ -151,6 +154,15 @@ public class RoomDAO extends MasterDAO{
             return null;
         }
     }
+
+
+
+
+
+
+
+
+
 
     private List<RoomAbstractClass> fetchRooms(PreparedStatement statement){
         if(connection != null) {
@@ -165,20 +177,41 @@ public class RoomDAO extends MasterDAO{
     }
     private List<RoomAbstractClass> resultSetToRoomList(ResultSet rs) throws SQLException {
         List<RoomAbstractClass> rooms= new ArrayList<>();
+
         while (rs.next()) {
             RoomAbstractClass room;
             int floor = rs.getInt("floor");
-            if(floor == 1) room = new NatureRetreatRoom();
-            else if(floor ==2) room = new VintageCharmRoom();
-            else room = new UrbanEleganceRoom();
+            if (floor == 1) {
+                room = new NatureRetreatRoom();
+            } else if (floor == 2) {
+                room = new VintageCharmRoom();
+            } else {
+                room = new UrbanEleganceRoom();
+            }
 
             room.setId(rs.getInt("id"));
             room.setFloor(floor);
             room.setRoomNumber(rs.getInt("room_number"));
-            room.setBeds(rs.getObject("room_beds", Bed.class));
-            room.setFloor(rs.getInt("floor_number"));
-            room.setCurrentRate(rs.getDouble("current_rate"));
-            room.setSmokerStatus(rs.getBoolean("smoker_status"));
+
+            // Create an array of Bed objects based on the values from the database
+            int numSingleBeds = rs.getInt("num_single_beds");
+            int numDoubleBeds = rs.getInt("num_double_beds");
+            int numQueenBeds = rs.getInt("num_queen_beds");
+            ArrayList<Bed> beds = new ArrayList<>();
+            for (int i = 0; i < numSingleBeds; i++) {
+                beds.add(new Bed(Bed.BedType.SINGLE));
+            }
+            for (int i = 0; i < numDoubleBeds; i++) {
+                beds.add(new Bed(Bed.BedType.DOUBLE));
+            }
+            for (int i = 0; i < numQueenBeds; i++) {
+                beds.add(new Bed(Bed.BedType.QUEEN));
+            }
+            room.setBeds(beds);
+
+            room.setFloor(floor);
+            room.setCurrentRate(rs.getDouble("rate"));
+            room.setSmokerStatus(rs.getBoolean("smoking_status"));
             rooms.add(room);
         }
         return rooms;
