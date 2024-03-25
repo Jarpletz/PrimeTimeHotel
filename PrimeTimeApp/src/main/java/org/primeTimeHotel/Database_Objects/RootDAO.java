@@ -37,6 +37,10 @@ public abstract class RootDAO<T extends AbstractDomainModelObject> {
         }
     }
 
+    protected abstract void setStatement(PreparedStatement statement, T t, int parameterIndex) throws SQLException;
+    protected void setStatement(PreparedStatement statement, T t) throws SQLException { setStatement(statement, t, 1); }
+    protected abstract T initializeEntry(ResultSet resultSet) throws SQLException;
+
     public T fetch(int id){
         String sql = "SELECT * FROM " + table_name + " WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -105,8 +109,4 @@ public abstract class RootDAO<T extends AbstractDomainModelObject> {
         }
         return false;
     }
-
-    protected abstract void setStatement(PreparedStatement statement, T t, int parameterIndex) throws SQLException;
-    protected void setStatement(PreparedStatement statement, T t) throws SQLException { setStatement(statement, t, 1); }
-    protected abstract T initializeEntry(ResultSet resultSet) throws SQLException;
 }
