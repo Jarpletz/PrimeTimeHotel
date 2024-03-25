@@ -142,6 +142,8 @@ public class RoomDAO extends MasterDAO{
             String placeholders = String.join(",", java.util.Collections.nCopies(notAvailable.size(), "?"));
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rooms WHERE FLOOR = ? AND ID NOT IN (" + placeholders + ")");
             statement.setInt(1, floorNumber);
+
+
             for (int i = 0; i < notAvailable.size(); i++) {
                 statement.setInt(i + 2, notAvailable.get(i));
             }
@@ -152,6 +154,15 @@ public class RoomDAO extends MasterDAO{
             return null;
         }
     }
+
+
+
+
+
+
+
+
+
 
     private List<RoomAbstractClass> fetchRooms(PreparedStatement statement){
         if(connection != null) {
@@ -166,6 +177,7 @@ public class RoomDAO extends MasterDAO{
     }
     private List<RoomAbstractClass> resultSetToRoomList(ResultSet rs) throws SQLException {
         List<RoomAbstractClass> rooms= new ArrayList<>();
+
         while (rs.next()) {
             RoomAbstractClass room;
             int floor = rs.getInt("floor");
@@ -195,9 +207,9 @@ public class RoomDAO extends MasterDAO{
             for (int i = 0; i < numQueenBeds; i++) {
                 beds.add(new Bed(Bed.BedType.QUEEN));
             }
-            room.setBeds(beds); // Assuming setBeds() accepts a List<Bed>
+            room.setBeds(beds);
 
-            room.setFloor(rs.getInt("floor"));
+            room.setFloor(floor);
             room.setCurrentRate(rs.getDouble("rate"));
             room.setSmokerStatus(rs.getBoolean("smoking_status"));
             rooms.add(room);

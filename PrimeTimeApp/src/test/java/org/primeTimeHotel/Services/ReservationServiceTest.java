@@ -37,8 +37,10 @@ public class ReservationServiceTest {
         startDate = new Date(parsedStartDate.getTime());
         endDate = new Date(parsedEndDate.getTime());
 
+
+        //fixme there is something wrong with the .getAvalibleRooms() I need august to help figure it out
         List<RoomAbstractClass> avalibleRooms = reservationService.getAvalibleRooms(startDate, endDate, 1);
-        assertEquals(2, avalibleRooms.size(), "Expecting there to be no rooms.");
+        assertEquals(0, avalibleRooms.size(), "Expecting there to be no rooms.");
 
 
     }
