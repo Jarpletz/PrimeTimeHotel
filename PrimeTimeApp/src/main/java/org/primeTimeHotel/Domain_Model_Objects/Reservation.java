@@ -32,18 +32,15 @@ public class Reservation extends AbstractDomainModelObject {
             throw new IllegalArgumentException("Invalid code: " + code);
         }
     }
-    //private int id;
     private int userId;
     private int roomId;
     private Date startDate;
     private Date endDate;
-
     private Status status;
 
-    public Reservation(){
-        this (-1, -1, null, null);
-    }
-
+    //public Reservation(){
+    //    this (-1, -1, null, null);
+    //}
     public Reservation(int userId, int roomId,Date startDate,Date endDate){
         this.id = -1;
         this.userId = userId;
