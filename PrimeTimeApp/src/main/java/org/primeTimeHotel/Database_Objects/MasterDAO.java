@@ -1,10 +1,16 @@
 package org.primeTimeHotel.Database_Objects;
 
+import org.primeTimeHotel.Domain_Model_Objects.AbstractDomainModelObject;
+import org.primeTimeHotel.Domain_Model_Objects.Reservation;
+
 import java.sql.*;
 
-public class MasterDAO {
+public abstract class MasterDAO<T extends AbstractDomainModelObject> {
     static protected Connection connection = null;
-    MasterDAO() {
+    protected String table_name;
+
+    MasterDAO(String table_name) {
+        this.table_name = table_name;
         if (connection == null) {
             try {
                 // Connect to the database
@@ -28,5 +34,77 @@ public class MasterDAO {
                 connection = null;
             }
         }
+    }
+
+
+
+    public abstract T fetch(int id);
+    public ResultSet fetchResultSet(int id){
+        String sql = "SELECT * FROM " + table_name + " WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+                return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean insert(T t){
+        if (fetchResultSet(t.getId()) != null) {
+            String[] names = t.getDBAttributeNames();
+            String sql =
+                "INSERT INTO " + table_name +
+                "(" + String.join(", ", names) + ") " +
+                "VALUES (" + String.join(", ", java.util.Collections.nCopies(names.length, "?"))+ ")";
+            String[] returnColumns = {"id"};
+            try (PreparedStatement statement = connection.prepareStatement(sql, returnColumns)) {
+                t.setStatement(statement,1);
+                if (statement.executeUpdate() > 0) {
+                    try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            t.setId(generatedKeys.getInt(1));
+                        }
+                    }
+                    return true;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean update(T t){
+        if (fetch(t.getId()) != null) {
+            String[] items = t.getDBAttributeNames();
+            for (int i = 0; i < items.length; i++)
+                items[i] = items[i] + " = ?";
+            String sql =
+                "UPDATE " + table_name + " " +
+                "SET " + String.join(", ", items) + " " +
+                "WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                t.setStatement(statement, 1);
+                return statement.executeUpdate() > 0;
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+    public boolean delete(int id){
+        if (fetch(id) != null) {
+            String sql = "DELETE FROM " + table_name + " WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, id);
+                return statement.executeUpdate() > 0;
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }

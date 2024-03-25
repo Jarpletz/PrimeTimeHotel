@@ -1,11 +1,12 @@
 package org.primeTimeHotel.Domain_Model_Objects;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class Reservation {
+public class Reservation extends AbstractDomainModelObject {
     public enum Status {
         CHECKED_IN(0),
         CHECKED_OUT(1),
@@ -31,7 +32,7 @@ public class Reservation {
             throw new IllegalArgumentException("Invalid code: " + code);
         }
     }
-    private int id;
+    //private int id;
     private int userId;
     private int roomId;
     private Date startDate;
@@ -40,20 +41,16 @@ public class Reservation {
     private Status status;
 
     public Reservation(){
-        id = -1;
-        userId = -1;
-        roomId = -1;
-        startDate = null;
-        endDate = null;
-        status = Status.SCHEDULED;
+        this (-1, -1, null, null);
     }
 
     public Reservation(int userId, int roomId,Date startDate,Date endDate){
-        setUserId(userId);
-        setRoomId(roomId);
-        setStartDate(startDate);
-        setEndDate(endDate);
-        status = Status.SCHEDULED;
+        this.id = -1;
+        this.userId = userId;
+        this.roomId = roomId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = Status.SCHEDULED;
     }
     public Reservation(ResultSet resultSet) throws SQLException {
         this(
@@ -66,9 +63,21 @@ public class Reservation {
         this.status = Status.fromCode(resultSet.getInt("status"));
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public void setStatement(PreparedStatement statement, int parameterIndex) throws SQLException {
+        statement.setInt(parameterIndex++, getUserId());
+        statement.setInt(parameterIndex++, getRoomId());
+        statement.setDate(parameterIndex++, getStartDate());
+        statement.setDate(parameterIndex++, getEndDate());
+        statement.setInt(parameterIndex++, getStatus().getCode());
+        if (id != -1)
+            statement.setInt(parameterIndex, getId());
     }
+    @Override
+    public String[] getDBAttributeNames() {
+        return new String[] {"user_id", "room_id", "start_date", "end_date", "status"};
+    }
+
     public int getUserId() {
         return userId;
     }
@@ -83,9 +92,6 @@ public class Reservation {
     }
     public Status getStatus(){return status;}
 
-    public void setId(int id) {
-        this.id = id;
-    }
     public void setUserId(int userId) {
         this.userId = userId;
     }

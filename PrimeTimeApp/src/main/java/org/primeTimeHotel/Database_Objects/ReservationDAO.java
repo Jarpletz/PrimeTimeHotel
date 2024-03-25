@@ -7,15 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationDAO extends  MasterDAO {
+public class ReservationDAO extends MasterDAO<Reservation> {
     private List<Reservation> tempData;
 
-    public Reservation fetchReservation(int reservationId){
-        String sql = "SELECT * FROM reservations WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, reservationId);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next())
+    ReservationDAO() {
+        super("reservations");
+    }
+
+    public Reservation fetch(int id) {
+        try {
+            ResultSet rs = super.fetchResultSet(id);
+            if (rs != null)
                 return new Reservation(rs);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -23,7 +25,7 @@ public class ReservationDAO extends  MasterDAO {
         return null;
     }
 
-    public List<Reservation> fetchAllReservations(){
+    public List<Reservation> fetchAll(){
         String sql = "SELECT * FROM reservations";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             return fetchReservations(statement);
@@ -98,60 +100,6 @@ public class ReservationDAO extends  MasterDAO {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public boolean insertReservation(Reservation r){
-        if (fetchReservation(r.getId()) != null) {
-            String sql = "INSERT INTO Reservations(user_id, room_id, start_date, end_date, status) " +
-                         "VALUES (?, ?, ?, ? ,?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1,r.getUserId());
-                statement.setInt(2, r.getRoomId());
-                statement.setDate(3,r.getStartDate());
-                statement.setDate(4,r.getEndDate());
-                statement.setInt(5, r.getStatus().getCode());
-                return statement.executeUpdate() > 0;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-
-    public boolean updateReservation(Reservation r){
-        if (fetchReservation(r.getId()) != null) {
-            String sql = "UPDATE Reservations " +
-                         "SET user_id = ?, room_id = ?, start_date = ?, end_date = ?, status = ? " +
-                         "WHERE id = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, r.getUserId());
-                statement.setInt(2, r.getRoomId());
-                statement.setDate(3, new java.sql.Date(r.getStartDate().getTime()));
-                statement.setDate(4, new java.sql.Date(r.getEndDate().getTime()));
-                statement.setInt(5, r.getStatus().getCode());
-                statement.setInt(6, r.getId());
-                return statement.executeUpdate() > 0;
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-    public boolean deleteReservation(int reservationId){
-        if (fetchReservation(reservationId) != null) {
-            String sql = "DELETE FROM Reservations WHERE id = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, reservationId);
-                return statement.executeUpdate() > 0;
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-
-    public boolean deleteReservation(Reservation r){
-        return deleteReservation(r.getId());
     }
 
     private List<Reservation> fetchReservations(PreparedStatement statement) {
