@@ -4,7 +4,7 @@ import org.primeTimeHotel.Database_Objects.ReservationDAO;
 import org.primeTimeHotel.Database_Objects.RoomDAO;
 import org.primeTimeHotel.Domain_Model_Objects.GuestAccount;
 import org.primeTimeHotel.Domain_Model_Objects.Reservation;
-import org.primeTimeHotel.Domain_Model_Objects.RoomAbstractClass;
+import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.RoomAbstractClass;
 
 import java.util.ArrayList;
 import java.sql.Date;

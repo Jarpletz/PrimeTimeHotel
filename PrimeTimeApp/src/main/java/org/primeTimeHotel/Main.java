@@ -5,6 +5,7 @@ import org.primeTimeHotel.Database_Objects.MasterDAO;
 import org.primeTimeHotel.Database_Objects.ReservationDAO;
 import org.primeTimeHotel.Database_Objects.RoomDAO;
 import org.primeTimeHotel.Domain_Model_Objects.*;
+import org.primeTimeHotel.Domain_Model_Objects.RoomClasses.Bed;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,6 @@ public class Main {
         dao.insert(new NatureRetreatRoom(1,100,150.5,beds, false, RoomAbstractClass.QualityLevel.ECONOMY));
 
         */
-
 
         MasterDAO.close();
     }
