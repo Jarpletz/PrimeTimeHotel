@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoomDAO extends MasterDAO{
+public class RoomDAO extends RootDAO {
     private List<RoomAbstractClass> tempRooms;
 
     public RoomDAO(){super();}

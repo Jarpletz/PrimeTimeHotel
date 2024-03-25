@@ -7,23 +7,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationDAO extends  MasterDAO {
-    private List<Reservation> tempData;
-
-    public Reservation fetchReservation(int reservationId){
-        String sql = "SELECT * FROM reservations WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, reservationId);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next())
-                return new Reservation(rs);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+public class ReservationDAO extends RootDAO<Reservation> {
+    ReservationDAO() {
+        super("reservations", new String[] {"user_id", "room_id", "start_date", "end_date", "status"});
     }
 
-    public List<Reservation> fetchAllReservations(){
+    @Override
+    public void setStatement(PreparedStatement statement, Reservation r, int parameterIndex) throws SQLException {
+        statement.setInt(parameterIndex++, r.getUserId());
+        statement.setInt(parameterIndex++, r.getRoomId());
+        statement.setDate(parameterIndex++, r.getStartDate());
+        statement.setDate(parameterIndex++, r.getEndDate());
+        statement.setInt(parameterIndex++, r.getStatus().getCode());
+        if (r.getId() != -1)
+            statement.setInt(parameterIndex, r.getId());
+    }
+    @Override
+    protected Reservation initializeEntry(ResultSet resultSet) throws SQLException {
+        Reservation r = new Reservation(
+            resultSet.getInt("user_id"),
+            resultSet.getInt("room_id"),
+            resultSet.getDate("start_date"),
+            resultSet.getDate("end_date")
+        );
+        r.setId(resultSet.getInt("id"));
+        r.setStatus(Reservation.Status.fromCode(resultSet.getInt("status")));
+        return r;
+    }
+
+
+    public List<Reservation> fetchAll(){
         String sql = "SELECT * FROM reservations";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             return fetchReservations(statement);
@@ -100,60 +113,6 @@ public class ReservationDAO extends  MasterDAO {
         return null;
     }
 
-    public boolean insertReservation(Reservation r){
-        if (fetchReservation(r.getId()) != null) {
-            String sql = "INSERT INTO Reservations(user_id, room_id, start_date, end_date, status) " +
-                         "VALUES (?, ?, ?, ? ,?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1,r.getUserId());
-                statement.setInt(2, r.getRoomId());
-                statement.setDate(3,r.getStartDate());
-                statement.setDate(4,r.getEndDate());
-                statement.setInt(5, r.getStatus().getCode());
-                return statement.executeUpdate() > 0;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-
-    public boolean updateReservation(Reservation r){
-        if (fetchReservation(r.getId()) != null) {
-            String sql = "UPDATE Reservations " +
-                         "SET user_id = ?, room_id = ?, start_date = ?, end_date = ?, status = ? " +
-                         "WHERE id = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, r.getUserId());
-                statement.setInt(2, r.getRoomId());
-                statement.setDate(3, new java.sql.Date(r.getStartDate().getTime()));
-                statement.setDate(4, new java.sql.Date(r.getEndDate().getTime()));
-                statement.setInt(5, r.getStatus().getCode());
-                statement.setInt(6, r.getId());
-                return statement.executeUpdate() > 0;
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-    public boolean deleteReservation(int reservationId){
-        if (fetchReservation(reservationId) != null) {
-            String sql = "DELETE FROM Reservations WHERE id = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, reservationId);
-                return statement.executeUpdate() > 0;
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-
-    public boolean deleteReservation(Reservation r){
-        return deleteReservation(r.getId());
-    }
-
     private List<Reservation> fetchReservations(PreparedStatement statement) {
         if (connection != null) {
             try {
@@ -168,7 +127,7 @@ public class ReservationDAO extends  MasterDAO {
     private List<Reservation> resultSetToReservationList(ResultSet rs) throws SQLException {
         List<Reservation> reservations= new ArrayList<>();
         while (rs.next()) {
-            reservations.add(new Reservation(rs));
+            reservations.add(initializeEntry(rs));
         }
         return reservations;
     }
