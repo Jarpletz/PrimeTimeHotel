@@ -41,7 +41,7 @@ public abstract class MasterDAO<T extends AbstractDomainModelObject> {
 
 
     public abstract T fetch(int id); // you cannot use the constructor of a generic so this is the workaround
-    public ResultSet fetchResultSet(int id){
+    protected ResultSet fetchResultSet(int id){
         String sql = "SELECT * FROM " + table_name + " WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
