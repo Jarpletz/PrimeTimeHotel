@@ -34,6 +34,7 @@ public abstract class Account extends AbstractDomainModelObject {
     private String lastName;
     private String phoneNumber;
     private String email;
+    private int paymentInfoId;
     private  Type type;
 
     // Constructor
@@ -113,6 +114,14 @@ public abstract class Account extends AbstractDomainModelObject {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public int getPaymentInfoId() {
+        return paymentInfoId;
+    }
+
+    public void setPaymentInfoId(int paymentInfoId) {
+        this.paymentInfoId = paymentInfoId;
     }
 
     @Override
