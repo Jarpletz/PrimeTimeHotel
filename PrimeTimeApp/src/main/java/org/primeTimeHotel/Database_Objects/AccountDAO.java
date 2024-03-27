@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AccountDAO extends RootDAO<Account> {
     public AccountDAO() {
-        super("accounts", new String[]{"username", "password", "first_name", "last_name", "phone_number", "email", "account_type"});
+        super("accounts", new String[]{"username", "password", "first_name", "last_name", "phone_number", "email", "account_type","payment_id"});
     }
     @Override
     protected void setStatement(PreparedStatement statement, Account account, int parameterIndex) throws SQLException {
@@ -21,6 +21,7 @@ public class AccountDAO extends RootDAO<Account> {
         statement.setString(parameterIndex++, account.getPhoneNumber());
         statement.setString(parameterIndex++, account.getEmail());
         statement.setInt(parameterIndex++, account.getType().getCode());
+        statement.setInt(parameterIndex++,account.getPaymentInfoId());
         if (account.getId() != -1)
             statement.setInt(parameterIndex, account.getId());
     }
@@ -39,6 +40,8 @@ public class AccountDAO extends RootDAO<Account> {
         account.setLastName(resultSet.getString("last_name"));
         account.setPhoneNumber(resultSet.getString("phone_number"));
         account.setEmail(resultSet.getString("email"));
+        account.setType(type);
+        account.setPaymentInfoId(resultSet.getInt("payment_id"));
         return account;
     }
 
