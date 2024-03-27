@@ -35,5 +35,18 @@ public class PaymentInfoDAO extends RootDAO<PaymentInformation>{
         return p;
     }
 
+    public PaymentInformation fetchByAccoutId(int accountId){
+        String sql = "SELECT * FROM PAYMENTINFO WHERE id IN(SELECT PAYMENT_ID FROM ACCOUNTS WHERE id = ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1,accountId);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()){
+                return initializeEntry(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

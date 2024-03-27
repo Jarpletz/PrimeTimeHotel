@@ -15,10 +15,7 @@ public class PaymentService {
     }
 
     public PaymentInformation getPaymentInfo(int accountId){
-        AccountDAO accountDAO = new AccountDAO();
-        int paymentId = accountDAO.fetch(accountId).getPaymentInfoId();
-        System.out.println("PAYMET ID:" + paymentId);
-        return dao.fetch(paymentId);
+        return dao.fetchByAccoutId(accountId);
     }
 
     public PaymentInformation createNewPaymentInfo(String provider, Long cardNumber, Date expirationDate,int securityCode,int zipCode){

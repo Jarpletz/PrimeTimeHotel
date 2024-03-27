@@ -59,6 +59,7 @@ public class PaymentInfoInput extends  JPanel{
         this.paymentId = -1;
         this.controller = pc;
 
+        this.setBorder(new EmptyBorder(5,5,5,5));
         EmptyBorder labelBorder = new EmptyBorder(0,5,5,5);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JPanel inputPanel = new JPanel();
@@ -81,7 +82,7 @@ public class PaymentInfoInput extends  JPanel{
         expirationMonthLabel.setBorder(labelBorder);
         expirationYearField = new JTextField();
         JLabel expirationYearLabel = new JLabel("/");
-        expirationYearField.setColumns(2);
+        expirationYearField.setColumns(4);
         expirationYearLabel.setLabelFor(expirationYearField);
         expirationYearLabel.setBorder(new EmptyBorder(2,5,5,5));
 

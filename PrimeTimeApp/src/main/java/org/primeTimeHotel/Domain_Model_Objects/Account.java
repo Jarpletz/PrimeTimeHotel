@@ -146,6 +146,7 @@ public abstract class Account extends AbstractDomainModelObject {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
+                ", PaymentInfoId='" + paymentInfoId + '\'' +
                 ", type=" + type +
                 "\n}\n";
     }
