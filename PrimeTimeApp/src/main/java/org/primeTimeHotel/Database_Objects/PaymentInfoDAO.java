@@ -1,10 +1,12 @@
 package org.primeTimeHotel.Database_Objects;
 
 import org.primeTimeHotel.Domain_Model_Objects.PaymentInformation;
+import org.primeTimeHotel.Domain_Model_Objects.Reservation;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class PaymentInfoDAO extends RootDAO<PaymentInformation>{
     public PaymentInfoDAO() {
@@ -25,11 +27,13 @@ public class PaymentInfoDAO extends RootDAO<PaymentInformation>{
     protected PaymentInformation initializeEntry(ResultSet resultSet) throws SQLException {
         PaymentInformation p = new PaymentInformation();
         p.setId(resultSet.getInt("id"));
-        p.setCardProvider(resultSet.getString("provider"));
-        p.setCardNumber(resultSet.getLong("card_number"));
-        p.setExpirationDate(resultSet.getDate("expiration_date"));
-        p.setSecurityCode(resultSet.getInt("security_code"));
-        p.setZipCode(resultSet.getInt("zipcode"));
+        p.setCardProvider(resultSet.getString("PROVIDER"));
+        p.setCardNumber(resultSet.getLong("CARD_NUMBER"));
+        p.setExpirationDate(resultSet.getDate("EXPIRATION_DATE"));
+        p.setSecurityCode(resultSet.getInt("SECURITY_CODE"));
+        p.setZipCode(resultSet.getInt("ZIPCODE"));
         return p;
     }
+
+
 }
