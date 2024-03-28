@@ -2,8 +2,22 @@
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-233.14015.106">
     <data-source name="prime-time-hotel" uuid="d0f8cc35-d495-418f-bc01-1e13fcefda1a">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="ORACLE" />
-      <schema-mapping />
+      <database-info product="Oracle" version="Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production&#10;Version 19.22.0.0.0" jdbc-version="4.3" driver-name="Oracle JDBC driver" driver-version="21.5.0.0.0" dbms="ORACLE" exact-version="19.0.0.0.0" exact-driver-version="21.5">
+        <extra-name-characters>$#</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>prime_time_admin</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema">
+            <name qname="@" />
+            <name qname="PUBLIC" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+      <load-sources>user_and_system_sources</load-sources>
     </data-source>
   </component>
 </project>

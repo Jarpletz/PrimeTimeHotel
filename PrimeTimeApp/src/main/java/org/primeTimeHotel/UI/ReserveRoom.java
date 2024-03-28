@@ -239,8 +239,8 @@ public class ReserveRoom {
         scrollBar = new JScrollBar();
         reserveScrollPane.getVerticalScrollBar().setUI(new MyScrollingBar());
         try{
-            companyLogo = ImageIO.read(new File("src/main/java/org/primeTimeHotel/UI/Prime Time Hotel Icon.png"));
-            tempRoomImage = ImageIO.read(new File("src/main/java/org/primeTimeHotel/UI/Prime Time Hotel Icon - Copy.png"));
+            companyLogo = ImageIO.read(new File("PrimeTimeApp/src/main/java/org/primeTimeHotel/UI/Prime Time Hotel Icon.png"));
+            tempRoomImage = ImageIO.read(new File("PrimeTimeApp/src/main/java/org/primeTimeHotel/UI/Prime Time Hotel Icon - Copy.png"));
             UIManager.put("ScrollBarUI", "src/main/java/org/primeTimeHotel/UI/Prime Time Hotel Icon.png");
             BasicScrollBarUI.createUI(scrollBar);
         }catch (IOException e){
